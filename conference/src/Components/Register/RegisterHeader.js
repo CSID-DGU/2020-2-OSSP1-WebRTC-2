@@ -32,29 +32,16 @@ const style = {
 class RegisterHeader extends Component {
 
     render() {
-        const { number, onClickHome } = this.props;
-        const prior = (number > 1) ? '/signup/'+(number - 1) : '/';
         return (
             <div>
                 <Container style={style.h3}>
-                    { <Link to={prior}><Button onClick={onClickHome} content='Back' icon='arrow alternate circle left outline' labelPosition='left' /></Link> }
+                    { <Link to='/'><Button content='Back' icon='arrow alternate circle left outline' labelPosition='left' /></Link> }
                     <h1>Join WEB-RTC PROJECT</h1>
                     회원 정보를 입력하세요.
                 </Container>
                 <Container style={style.base}>
                     <Step.Group fluid>
-                        { (number === '1' || number === undefined) ?
-                            ( <Step active icon='address card' title='Step 1:' description='Create personal account' /> )
-                            : ( <Step disabled icon='address card' title='Step 1:' description='Create personal account' /> )
-                        }
-                        {/*{ number === '2' ?
-                            ( <Step active icon='clipboard outline' title='Step 2:' description='Enter your detail information' /> )
-                            : ( <Step disabled icon='clipboard outline' title='Step 2:' description='Enter your detail information' /> )
-                        }
-                        { number === '3' ?
-                            ( <Step active icon='tasks' title='Step 3:' description='Enter your experience' /> )
-                            : ( <Step disabled icon='tasks' title='Step 3:' description='Enter your experience' /> )
-                        }*/}
+                        <Step active icon='address card' title='Step 1:' description='Create personal account' />
                     </Step.Group>
                 </Container>
             </div>

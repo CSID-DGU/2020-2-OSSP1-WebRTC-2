@@ -8,14 +8,11 @@ import {
 
 class Signup extends Component {
     render() {
-        const { match } = this.props;
-        const number = match.params.number;
         return (
             <div>
-                <RegisterHeader number={number} />
+                <RegisterHeader />
                 <Container style={{marginBottom: '2rem'}}>
-                    { (number === '1' || number === undefined) && <PersonalInput />}
-                    { (number === '2') && <CompleteRegister/>}
+                    <PersonalInput />
                 </Container>
             </div>
         )

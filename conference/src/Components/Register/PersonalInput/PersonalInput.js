@@ -22,7 +22,6 @@ const style = {
 class PersonalInput extends Component {
 
     render() {
-        const { onClickCreate } = this.props;
         return (
             <div>
                 <Form>
@@ -35,15 +34,8 @@ class PersonalInput extends Component {
                         <Form.Input name='password' fluid icon='lock' placeholder='Password' type='password'/>
                         <Label style={style.base}> Password Check </Label>
                         <Form.Input name='pcheck' fluid icon='check' placeholder='Password Check' type='password'/>
-                        {/*<Label style={style.base}> Email Authentication </Label>
-                        <div>
-                            <Form.Input name='certification_number' fluid icon='at' placeholder='Certification Number'/>
-                            <Message style={{fontSize:'1rem'}} content="If you don't receive our mail, click 're-send' button" icon='info circle' info />
-                            <Button> Send email </Button>
-                            <Button primary>confirm</Button>
-        </div>*/}
                     </Segment>
-                    <Button onClick={onClickCreate} color='black' fluid size='large'>Create</Button>
+                    <Link to='/completeregister'><Button content='Create' color='black' fluid size='large'/></Link>
                 </Form>
             </div>
         );
