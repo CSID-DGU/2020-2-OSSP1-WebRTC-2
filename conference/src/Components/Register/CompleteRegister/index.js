@@ -1,1 +1,1 @@
-export { default } from './CompleteRegister';
+export { default as CompleteRegister } from './CompleteRegister';

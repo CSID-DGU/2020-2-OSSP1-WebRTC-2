@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Home, Signup } from '/Users/rush-k/Desktop/OpenSWProject/2020-2-OSSP1-WebRTC-2/conference/src/pages';
-import { CompleteRegister } from '/Users/rush-k/Desktop/OpenSWProject/2020-2-OSSP1-WebRTC-2/conference/src/Components/Register';
+import { Home, Main, Signup } from './pages';
+import { CompleteRegister } from './Components/Register/CompleteRegister';
 import { Route, Switch } from 'react-router-dom';
 
 class App extends Component {
@@ -10,6 +10,7 @@ class App extends Component {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/completeregister" component={CompleteRegister} />
+                <Route path="/main" component={Main}/>
             </div>
         );
     };

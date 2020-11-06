@@ -35,7 +35,7 @@ class PersonalInput extends Component {
                         <Label style={style.base}> Password Check </Label>
                         <Form.Input name='pcheck' fluid icon='check' placeholder='Password Check' type='password'/>
                     </Segment>
-                    <Link to='/completeregister'><Button content='Create' color='black' fluid size='large'/></Link>
+                    <Link to='/completeregister'><Button content='Create' color='orange' fluid size='large'/></Link>
                 </Form>
             </div>
         );

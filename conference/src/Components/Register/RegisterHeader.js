@@ -35,7 +35,7 @@ class RegisterHeader extends Component {
         return (
             <div>
                 <Container style={style.h3}>
-                    { <Link to='/'><Button content='Back' icon='arrow alternate circle left outline' labelPosition='left' /></Link> }
+                    { <Link to='/'><Button color='orange' content='Back' icon='arrow alternate circle left outline' labelPosition='left' /></Link> }
                     <h1>Join WEB-RTC PROJECT</h1>
                     회원 정보를 입력하세요.
                 </Container>
