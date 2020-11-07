@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Home, Main, Signup } from './pages';
 import { CompleteRegister } from './Components/Register/CompleteRegister';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 class App extends Component {
     render() {      
