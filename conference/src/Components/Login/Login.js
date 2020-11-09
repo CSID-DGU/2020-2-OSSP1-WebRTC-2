@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import logo from '/Users/rush-k/Desktop/OpenSWProject/2020-2-OSSP1-WebRTC-2/conference/src/image/logo.png';
+import logo from '/Users/parkjiho/Desktop/2020-2-OSSP1-WebRTC-2/conference/src/image/logo.png';
 import { Link } from 'react-router-dom';
 
 import { Button, Form, Grid, Message, Segment } from 'semantic-ui-react'

@@ -1,27 +1,29 @@
 const express = require('express')
 
-var io = require('soket.io')
+var io = require('socket.io')
 ({
-    path : '/webrtc'
+    path: '/webrtc'
 })
-const app = express()
-const part = 8080
 
-//app.get('/', (req, res)=>res.send('Hello World!!!'))
+const app = express()
+const port = 8080
+
+//app.get('/',(req, res)=>res.send('Hello World!!!!'))
 
 app.use(express.static(__dirname + '/build'))
 app.get('/', (req, res, next)=>{
     res.sendFile(__dirname + '/build/index.html')
 })
 
-const server = app.listen(part, () => console.log('Example app listening on part 8080!!'))
+const server = app.listen(port, () => console.log('Example app listening on port 8080!!'))
 
 io.listen(server)
 
-const peers = io.of('./webrtcPeer')
+const peers = io.of('/webrtcPeer')
 
 let connectedPeers = new Map()
-peers.in('connection', socket => {
+
+peers.on('connection', socket => {
     console.log(socket.id)
     socket.emit('connection-success', {success: socket.id})
 
@@ -40,6 +42,7 @@ peers.in('connection', socket => {
             }
         }
     })
+    
     socket.on('candidate', (data)=>{
         for(const [socketID, socket] of connectedPeers.entries()){
             if(socketID !== data.socketID){
