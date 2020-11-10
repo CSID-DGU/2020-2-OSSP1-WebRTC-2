@@ -10,7 +10,7 @@
   npm start
  ```
  ### 혹은 웹 페이지에서 
- ### http://localhost:3001 입력하여 실행
+ ### http://localhost:3000 입력하여 실행
 
  ## 팀원
  * 김민수
