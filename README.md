@@ -6,7 +6,7 @@
  ### master branch 기준
   ```
   git clone https://github.com/CSID-DGU/2020-2-OSSP1-WebRTC-2.git
-  cd conference
+  cd  2020-2-OSSP1-WebRTC-2/conference
   npm start
  ```
  ### 혹은 웹 페이지에서 
