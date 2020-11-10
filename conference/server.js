@@ -34,6 +34,16 @@ peers.on('connection', socket => {
         connectedPeers.delete(socket.id)
     })
 
+    socket.on('onlinePeers', (data)=>{
+        for (const [socketID, _socket] of connectedPeers.entries()) {
+            // 나 빼고 다른사람들한테 보냄
+            if (socketID !== data.socketID) {
+              console.log('online-peer', data.socketID, socketID)
+              socket.emit('online-peer', socketID)
+            }
+        }
+    })
+
     socket.on('offerOrAnswer', (data)=>{
         for(const [socketID, socket] of connectedPeers.entries()){
             if(socketID !== data.socketID){
@@ -42,7 +52,7 @@ peers.on('connection', socket => {
             }
         }
     })
-    
+
     socket.on('candidate', (data)=>{
         for(const [socketID, socket] of connectedPeers.entries()){
             if(socketID !== data.socketID){
