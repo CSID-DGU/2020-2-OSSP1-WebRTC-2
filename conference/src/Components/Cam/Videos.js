@@ -35,12 +35,12 @@ class Videos extends Component {
         //   _videoTrack[0].onmute = () => {
         //     alert('muted')
         //   }
-
+        //비디오 허용일때만 비디오 보여줌
         let video = _videoTrack && (
           <Video
             videoMuted={this.videoMuted}
             videoType='remoteVideo'
-            videoStream={rVideo.stream}
+            videoStream={rVideo.stream}//맨위
             frameStyle={{
               backgroundColor: '#ffffff12',
               maxWidth: 120, maxHeight: 120,
@@ -53,6 +53,7 @@ class Videos extends Component {
               width: 120, height: 120,
               maxWidth: 120, maxHeight: 120,
             }}
+            //autoplay
           />
         ) || <div></div>
 

@@ -90,6 +90,7 @@ class Video extends Component {
 
     return (
       <div
+        //여기, 이거 없나?
         style={{ ...this.props.frameStyle,  }}
       >
         {/* <audio id={this.props.id} muted={this.props.muted} ref={ (ref) => {this.video = ref }}></audio> */}

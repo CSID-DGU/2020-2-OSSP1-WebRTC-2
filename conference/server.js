@@ -14,10 +14,12 @@ const messages = {}
 //app.get('/',(req, res)=>res.send('Hello World!!!!'))
 
 app.use(express.static(__dirname + '/build'))
+//default room(특정 room 없는 경우)
 app.get('/', (req, res, next)=>{
     res.sendFile(__dirname + '/build/index.html')
 })
 
+//specified room있는 경우
 app.get('/:room', (req, res, next) => {
   res.sendFile(__dirname + '/build/index.html')
   // res.status(200).json({data: 'test'})
@@ -48,9 +50,9 @@ io.on('connection', socket => {
 const peers = io.of('/webrtcPeer')
 
 peers.on('connection', socket => {
-
+  //쿼리 객체로 부터 room 정보 받아옴
   const room = socket.handshake.query.room
-
+  //rooms array에 room 추가
   rooms[room] = rooms[room] && rooms[room].set(socket.id, socket) || (new Map()).set(socket.id, socket)
   messages[room] = messages[room] || []
 
@@ -72,7 +74,7 @@ peers.on('connection', socket => {
     for (const [socketID, _socket] of _connectedPeers.entries()) {
       // if (socketID !== socket.id) {
         _socket.emit('joined-peers', {
-          peerCount: rooms[room].size, //connectedPeers.size,
+          peerCount: rooms[room].size //connectedPeers.size,
         })
       // }
     }
@@ -92,7 +94,7 @@ peers.on('connection', socket => {
         })
     }
   }
-
+  //catch new meesage
   socket.on('new-message', (data) => {
     console.log('new-message', JSON.parse(data.payload))
 

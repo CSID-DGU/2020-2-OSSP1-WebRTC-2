@@ -154,6 +154,7 @@ class Cam extends Component {
           _remoteStream = rVideos[0].stream
           _remoteStream.addTrack(e.track, _remoteStream)
 
+          //???
           remoteVideo = { // let delete
             ...rVideos[0],
             stream: _remoteStream,
@@ -247,7 +248,7 @@ class Cam extends Component {
         messages: data.messages
       })
     })
-
+    //업데이트 연결된 peer 개수
     this.socket.on('joined-peers', data => {
 
       this.setState({
@@ -504,7 +505,7 @@ class Cam extends Component {
   }
 
   render() {
-
+    //???
     const {
       status,
       messages,
@@ -614,11 +615,13 @@ class Cam extends Component {
             user={{
               uid: this.socket && this.socket.id || ''
           }}
+          //변경사항 확인
           messages={messages}
           sendMessage={(message) => {
             this.setState(prevState => {
               return {messages: [...prevState.messages, message]}
             })
+            //채널이 오픈되어있을때만
             this.state.sendChannels.map(sendChannel => {
               sendChannel.readyState === 'open' && sendChannel.send(JSON.stringify(message))
             })
