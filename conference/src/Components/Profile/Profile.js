@@ -42,18 +42,14 @@ class Profile extends Component {
                         onChange={this.handleFileOnChange}>
                     </input>
                     {profile_preview}
+                    <Container style={{ marginTop: '2vh' }}>
+                        <text style={{ fontSize: '40px' }}>{this.state.name} 님</text>
+                    </Container>
+                    <Container>
+                        <text style={{ fontSize: '15px' }}>{this.state.id}</text>
+                    </Container>
                     </Container>
                 </div>
-                     </Container>
-                <Container style={{ marginTop: '2vh', justifyContent: 'center' }}>
-               
-                </Container>
-                
-                <Container style={{ marginTop: '2vh' }}>
-                    <text style={{ fontSize: '40px' }}>{this.state.name} 님</text>
-                </Container>
-                <Container>
-                    <text style={{ fontSize: '15px' }}>{this.state.id}</text>
                 </Container>
             </Container>
         );

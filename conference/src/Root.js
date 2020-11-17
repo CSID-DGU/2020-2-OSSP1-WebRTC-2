@@ -5,7 +5,7 @@ import { Blackboard } from './Components/Blackboard';
 
 const Root = () => (
     <BrowserRouter>
-        <Blackboard/>
+        <App/>
     </BrowserRouter>
 )
 

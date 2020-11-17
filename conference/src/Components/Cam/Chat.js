@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import DragDrop from './DragDrop'
+import { Paper, TextField } from'@material-ui/core';
 
 const Chat = props => {
   const [message, setMessage] = useState('')
@@ -88,20 +89,35 @@ const Chat = props => {
     <div>
       {imageZoom && showEnlargedImage(selectedImage)}
 
-      <div className="chatWindow" style={{
+      <Paper elevation={3} className="chatWindow" style={{
         zIndex: 10,
         position: 'absolute',
         right: 5,
         top: 190,
         bottom: 140,
+        overflow: 'scroll',
         width: 350,
-        // height: 650,
+        //height: 650,
     }}>
+      <Paper>
+            <form onSubmit={handleSubmit}>
+              <TextField
+                className="textarea input"
+                type="text"
+                placeholder="Enter your message..."
+                onChange={handleChange}
+                value={message}
+                style={{width:"100%"}}
+              />
+            </form>
+      </Paper>
         <ul className="chat" id="chatList">
           {props.messages.map(data => (
-            <div key={data.id}>
+            <Paper square elevation={2} style={{width: "95%", marginBottom: "1vh"}}>
+            <div key={data.id} style={{overflow : 'auto'}}>
               {user.uid === data.message.sender.uid ? renderMessage('self', data) : (renderMessage('other', data))}
             </div>
+            </Paper>
           ))}
         </ul>
         <DragDrop
@@ -121,19 +137,8 @@ const Chat = props => {
             reader.readAsDataURL(files[0])
           }}
         >
-          <div>
-            <form onSubmit={handleSubmit}>
-              <input
-                className="textarea input"
-                type="text"
-                placeholder="Enter your message..."
-                onChange={handleChange}
-                value={message}
-              />
-            </form>
-          </div>
         </DragDrop>
-      </div>
+      </Paper>
       </div>
     )
 }

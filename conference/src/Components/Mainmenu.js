@@ -1,103 +1,89 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Toolbar from '@material-ui/core/Toolbar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
-import minilogo from '../image/logomini.png';
-import { Participatemeeting } from './Participatemeeting';
-import { Generate } from './Generate';
-import Drawer from '@material-ui/core/Drawer';
-import { Profile } from './Profile';
-import { Explain } from './Explain';
+import Box from '@material-ui/core/Box';
+import Explain from './Explain/Explain';
+import Participatemeeting from './Participatemeeting/Participatemeeting';
+import Profile from './Profile/Profile';
 
-class Mainmenu extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      participate: false,
-      generate: false,
-      watch: false,
-      profile: false
-    }
-  }
-  
-  render() {
-    const {classes} = this.props;
-    const transScreen = (index) => {
-      this.setState({participate: false,
-                     generate: false,
-                     watch: false,
-                     profile: false
-                     });
-      if (index === 0) {
-        this.setState({participate: true});
-      } else if (index === 1) {
-        this.setState({generate: true});
-      } else if (index === 2) {
-        this.setState({watch: true});
-      } else if (index === 3) {
-        this.setState({profile: true});
-      } else {
-        this.setState({participate: false,
-          generate: false,
-          watch: false,
-          profile: false
-          });
-      }
-    }
-    return (
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppBar style={{backgroundColor: '#F6BB43'}} position="fixed" className={classes.appBar}>
-          <Toolbar>
-            <Typography variant="h6" noWrap>
-              Welcome to Conference!
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        anchor="left"
-        >
-        <div className={classes.toolbar}>
-            <img src={minilogo} onClick={() => transScreen(4)} style={{width: '100%'}}/>
-        </div>
-        <Divider />
-        <List>
-          
-          {['미팅 참여하기', '미팅 개설하기', '녹화영상 보기', '프로필 변경하기'].map((text, index) => (
-            <ListItem button onClick={() => transScreen(index)} key={text}>
-              <ListItemIcon><InboxIcon /> </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-      </Drawer>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-           { this.state.participate === false &&
-             this.state.generate === false &&
-             this.state.watch === false &&
-             this.state.profile === false &&
-             <Explain /> }
-           { this.state.participate === true && <Participatemeeting /> }
-           { this.state.generate === true && <Generate /> }
-           { this.state.profile === true && <Profile /> }
-        </main>
-      </div>
-    );
-  }
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
 }
 
-export default Mainmenu;
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
+
+export default function SimpleTabs() {
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+          <Tab label="홈" {...a11yProps(0)} />
+          <Tab label="미팅 개설하기" {...a11yProps(1)} />
+          <Tab label="미팅 참여하기" {...a11yProps(2)} />
+          <Tab label="녹화영상 보기" {...a11yProps(3)} />
+          <Tab label="프로필 변경하기" {...a11yProps(4)} />
+        </Tabs>
+      </AppBar>
+      <TabPanel value={value} index={0}>
+        <Explain/>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        ㅋㅅㅋ
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <Participatemeeting/>
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        Item Three
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        <Profile />
+      </TabPanel>
+    </div>
+  );
+}
