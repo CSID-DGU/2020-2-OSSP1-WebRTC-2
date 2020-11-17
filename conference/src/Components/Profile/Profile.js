@@ -27,7 +27,7 @@ class Profile extends Component {
     render() {
         let profile_preview = null;
         if (this.state.file !== '') {
-            profile_preview = <img className='profile_preview' src={this.state.previewURL} ></img>
+            profile_preview = <Avatar className='profile_preview' src={this.state.previewURL} style={{ width: '300px', height: '300px', justifyContent: 'center'}}></Avatar>
         }else{
             profile_preview = <Avatar src={BrokenImg} style={{ width: '300px', height: '300px', justifyContent: 'center'}} />
         }
