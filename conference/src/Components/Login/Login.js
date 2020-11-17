@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import logo from 'C:/Users/emili/Documents/2020-2-OSSP1-WebRTC-2/conference/src/image/logo.png';
+import logo from '../../image/logo.png';
 import { Link } from 'react-router-dom';
 
 import { Button, Form, Grid, Message, Segment } from 'semantic-ui-react'
