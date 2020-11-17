@@ -6,7 +6,7 @@ var io = require('socket.io')
 })
 
 const app = express()
-const port = 3000
+const port = 8080
 
 const rooms = {}
 const messages = {}
