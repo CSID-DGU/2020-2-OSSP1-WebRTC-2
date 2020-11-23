@@ -22,8 +22,10 @@ class Participatemeeting extends Component {
             <Container style={{textAlign: 'center', marginTop:'10vh'}} name = "linkto">
                 <h1>미팅 참여하기</h1>
                 <h3>아래에 주소를 입력해주세요.</h3>
-                <TextField
+               
+                <input type = "text"
                 id="standard-full-width"
+                value={linkURL}
                 label="Put Address"
                 type="text"
                 style={{ marginTop: 80 }}
