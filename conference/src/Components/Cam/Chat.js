@@ -91,13 +91,13 @@ const Chat = props => {
 
       <Paper elevation={3} className="chatWindow" style={{
         zIndex: 10,
-        position: 'absolute',
-        right: 5,
-        top: 190,
-        bottom: 140,
+        //position: 'absolute',
+        //right: 5,
+        //top: 190,
+        //bottom: 140,
         overflow: 'scroll',
-        width: 350,
-        //height: 650,
+        //width: 350,
+        height: "50vh",
     }}>
       <Paper>
             <form onSubmit={handleSubmit}>
