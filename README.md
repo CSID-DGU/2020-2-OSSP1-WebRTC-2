@@ -53,4 +53,10 @@
  * 권지형
  * 이시은
 
-###https://scshim.tistory.com/6
+https://scshim.tistory.com/6
+
+
+![kurento localhost8443](https://user-images.githubusercontent.com/46514182/100539139-5efe9c80-3202-11eb-82da-04f855d4e118.png)
+
+![kurento start](https://user-images.githubusercontent.com/46514182/100539142-6160f680-3202-11eb-86ed-a1e6ed6c8269.png)
+
