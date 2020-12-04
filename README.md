@@ -60,3 +60,9 @@ https://scshim.tistory.com/6
 
 ![kurento start](https://user-images.githubusercontent.com/46514182/100539142-6160f680-3202-11eb-86ed-a1e6ed6c8269.png)
 
+
+##추가내용
+```
+npm 업데이트 방법 : sudo npm install npm@latest -g
+```
+
