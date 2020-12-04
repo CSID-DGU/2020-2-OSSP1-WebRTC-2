@@ -70,3 +70,6 @@ srp 이용해서 서버에 올리기 scp -r -i pClass.pem /Users/rush-k/Desktop/
 ![issue](https://user-images.githubusercontent.com/46514182/101172488-3ebe4b80-360f-11eb-970e-b67dbff55a0b.png)
 ![node server](https://user-images.githubusercontent.com/46514182/101172504-4120a580-360f-11eb-8184-a6c28476cb0a.png)
 ![npm install kurento-client](https://user-images.githubusercontent.com/46514182/101172537-4d0c6780-360f-11eb-8d49-e39290ee83e6.png)
+![aws_apache](https://user-images.githubusercontent.com/46514182/101172671-788f5200-360f-11eb-9c92-37e9eff9bf29.png)
+![lastpang](https://user-images.githubusercontent.com/46514182/101172673-79c07f00-360f-11eb-8bc9-c10d3cfdbcd8.png)
+
