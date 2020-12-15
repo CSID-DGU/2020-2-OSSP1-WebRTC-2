@@ -66,7 +66,7 @@ https://scshim.tistory.com/6
 ```
 npm 업데이트 방법 : sudo npm install npm@latest -g
 
-srp 이용해서 서버에 올리기 scp -r -i pClass.pem /Users/rush-k/Desktop/pclass/build/* ubuntu@ec2-15-165-236-0.ap-northeast-2.compute.amazonaws.com:/var/www/html
+srp 이용해서 서버에 올리기 scp -r -i test.pem 
 ```
 ![issue](https://user-images.githubusercontent.com/46514182/101172488-3ebe4b80-360f-11eb-970e-b67dbff55a0b.png)
 ![node server](https://user-images.githubusercontent.com/46514182/101172504-4120a580-360f-11eb-8184-a6c28476cb0a.png)
