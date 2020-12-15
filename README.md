@@ -32,7 +32,8 @@
  > 경로 이동 후 npm 설치
  ```
  $ cd conference
- $ npm install  
+ $ npm install -g bower
+ $ bower install kurento-client  
  ```  
  #
  
