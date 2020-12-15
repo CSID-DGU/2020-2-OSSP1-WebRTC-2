@@ -100,7 +100,7 @@ class Videos extends Component {
   render() {
     return (
       <div style={{display: "grid", gridTemplateRows: "1fr 1fr", gridTemplateColumns: "1fr"}}>
-        <Video // 큰 화면 뜨는 곳
+        <Video // 대장 화면 뜨는 곳
           videoType='previewVideo'
           frameStyle={{
             zIndex: 3,
@@ -108,7 +108,9 @@ class Videos extends Component {
             gridRow: "1 / 2",
             gridColumn: "1 / 2",
             //bottom: 0,
-            minWidth: '50vh', minHeight: '50vh',
+            width: "50%",
+            height: "50%",
+            //minWidth: '50vh', minHeight: '50vh',
             backgroundColor: 'black'
           }}
           videoStyles={{
