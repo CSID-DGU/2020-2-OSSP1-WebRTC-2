@@ -8,7 +8,7 @@ class App extends Component {
     render() {      
         return (
             <div>
-                <Route exact path="/" component={Cam} />
+                <Route exact path="/" component={Home} />
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/completeregister" component={CompleteRegister} />
                 <Route path="/main" component={Main}/>

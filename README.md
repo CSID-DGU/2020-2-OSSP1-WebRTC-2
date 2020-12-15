@@ -52,3 +52,24 @@
  * 이은영
  * 권지형
  * 이시은
+
+https://scshim.tistory.com/6
+
+
+![kurento localhost8443](https://user-images.githubusercontent.com/46514182/100539139-5efe9c80-3202-11eb-82da-04f855d4e118.png)
+
+![kurento start](https://user-images.githubusercontent.com/46514182/100539142-6160f680-3202-11eb-86ed-a1e6ed6c8269.png)
+
+
+##추가내용
+```
+npm 업데이트 방법 : sudo npm install npm@latest -g
+
+srp 이용해서 서버에 올리기 scp -r -i pClass.pem /Users/rush-k/Desktop/pclass/build/* ubuntu@ec2-15-165-236-0.ap-northeast-2.compute.amazonaws.com:/var/www/html
+```
+![issue](https://user-images.githubusercontent.com/46514182/101172488-3ebe4b80-360f-11eb-970e-b67dbff55a0b.png)
+![node server](https://user-images.githubusercontent.com/46514182/101172504-4120a580-360f-11eb-8184-a6c28476cb0a.png)
+![npm install kurento-client](https://user-images.githubusercontent.com/46514182/101172537-4d0c6780-360f-11eb-8d49-e39290ee83e6.png)
+![aws_apache](https://user-images.githubusercontent.com/46514182/101172671-788f5200-360f-11eb-9c92-37e9eff9bf29.png)
+![lastpang](https://user-images.githubusercontent.com/46514182/101172673-79c07f00-360f-11eb-8bc9-c10d3cfdbcd8.png)
+

@@ -99,35 +99,37 @@ class Videos extends Component {
 
   render() {
     return (
-      <div>
-        <Video
+      <div style={{display: "grid", gridTemplateRows: "1fr 1fr", gridTemplateColumns: "1fr"}}>
+        <Video // 큰 화면 뜨는 곳
           videoType='previewVideo'
           frameStyle={{
-            zIndex: 1,
-            position: 'fixed',
-            bottom: 0,
-            minWidth: '100%', minHeight: '100%',
+            zIndex: 3,
+            //position: 'fixed',
+            gridRow: "1 / 2",
+            gridColumn: "1 / 2",
+            //bottom: 0,
+            minWidth: '50vh', minHeight: '50vh',
             backgroundColor: 'black'
           }}
           videoStyles={{
-            minWidth: '100%', minHeight: '100%',
+            minWidth: '40%', minHeight: '20%',
             visibility: this.state.videoVisible && 'visible' || 'hidden',
           }}
           videoStream={this.state.selectedVideo && this.state.selectedVideo.stream}
         />
-        <div
+        <div // 사람들 화면 뜨는 곳
           style={{
-            zIndex: 3,
-            position: 'fixed',
-            padding: '6px 3px',
+            gridRow: "2 / 3",
+            gridColumn: "1 / 2",
+            zIndex: 1,
+            //position: 'fixed',
+            //padding: '6px 3px',
             backgroundColor: 'rgba(0,0,0,0.3)',
-            maxHeight: 120,
-            top: 'auto',
-            right: 10,
-            left: 10,
-            bottom: 10,
-            overflowX: 'scroll',
-            whiteSpace: 'nowrap'
+            minWidth: '100%', minHeight: '100%',
+            //top: 'auto',
+            //right: 10,
+            //left: 10,
+            //whiteSpace: 'nowrap'
           }}
         >
           { this.state.rVideos }
