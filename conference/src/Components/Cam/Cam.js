@@ -17,6 +17,7 @@ class Cam extends Component {
     this.state = {
       isNickname: false,
       nickName: "",
+      screenShare: false,
 
       localStream: null,    // used to hold local stream object to avoid recreating the stream everytime a new offer comes
       remoteStream: null,    // used to hold remote stream object that is displayed in the main screen
@@ -48,7 +49,7 @@ class Cam extends Component {
     }
 
     // DONT FORGET TO CHANGE TO YOUR URL
-    this.serviceIP = 'https://dcc9e27e924f.ngrok.io/webrtcPeer'
+    this.serviceIP = 'https://c191ca613c8d.ngrok.io/webrtcPeer'
 
     // https://reactjs.org/docs/refs-and-the-dom.html
     // this.localVideoref = React.createRef()
@@ -95,9 +96,16 @@ class Cam extends Component {
     }
 
     // https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
-    navigator.mediaDevices.getUserMedia(constraints)
+
+    if (this.state.screenShare == false) {
+      navigator.mediaDevices.getUserMedia(constraints)
       .then(success)
       .catch(failure)
+    } else {
+      navigator.mediaDevices.getDisplayMedia({
+        video: true
+      }).then(success).catch(failure)
+    }
   }
 
   whoisOnline = () => {
@@ -519,6 +527,11 @@ class Cam extends Component {
     }
   }
 
+  shareScreen = () => {
+    this.setState({screenShare: !this.state.screenShare});
+    this.getLocalStream();
+  }
+
   render() {
     console.log(this.state.nickName);
     //???
@@ -573,6 +586,7 @@ class Cam extends Component {
       }}>
         
     </Draggable>*/}
+      {/* 내얼굴 */}
       <Paper variant="outlined" style={{padding: '2vh'}}>
         <Video
           videoType='localVideo'
@@ -596,7 +610,7 @@ class Cam extends Component {
           videoStream={localStream}
           autoPlay muted>
         </Video>
-
+          <Button onClick={this.shareScreen}>화면 공유하기</Button>
         </Paper>
       <div style={{
           zIndex: 5,
