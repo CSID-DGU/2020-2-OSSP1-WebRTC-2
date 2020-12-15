@@ -48,7 +48,7 @@ class Cam extends Component {
     }
 
     // DONT FORGET TO CHANGE TO YOUR URL
-    this.serviceIP = 'https://0cf7aaf055ed.ngrok.io/webrtcPeer'
+    this.serviceIP = 'https://dcc9e27e924f.ngrok.io/webrtcPeer'
 
     // https://reactjs.org/docs/refs-and-the-dom.html
     // this.localVideoref = React.createRef()
@@ -599,7 +599,7 @@ class Cam extends Component {
 
         </Paper>
       <div style={{
-          zIndex: 3,
+          zIndex: 5,
           position: 'absolute',
           // margin: 10,
           // backgroundColor: '#cdc4ff4f',
@@ -614,7 +614,7 @@ class Cam extends Component {
             borderRadius: 5,
           }}>{ statusText }</div>
       </div>
-      <Paper variant='outlined' style={{padding: '2vh', gridRow: '1 / 3', gridColumn: '1 / 2'}}>
+      <Paper style={{gridRow: '1 / 3', gridColumn: '1 / 2'}}>
         <Videos
           switchVideo={this.switchVideo}
           remoteStreams={remoteStreams}

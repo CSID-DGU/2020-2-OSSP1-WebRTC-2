@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
+import { Paper, Divider } from '@material-ui/core';
 import Video from './Video'
+import MonitorIcon from '@material-ui/icons/ScreenShare';
 
 class Videos extends Component {
   constructor(props) {
@@ -99,30 +101,46 @@ class Videos extends Component {
 
   render() {
     return (
-      <div style={{display: "grid", gridTemplateRows: "1fr 1fr", gridTemplateColumns: "1fr"}}>
+      <div style={{height: "100%", display: "grid", gridTemplateRows: "47% 3% 50%", gridTemplateColumns: "1fr"}}>
+        <Paper variant="outlined" style={{
+                      gridRow: "1 / 2",
+                      gridColumn: "1 / 2",
+                      //bottom: 0,
+                      width: "100%",
+                      height: "100%",
+                      padding: "2vh"
+        }}>
         <Video // 대장 화면 뜨는 곳
+          style={{width: "100%", height: "100%"}} 
           videoType='previewVideo'
           frameStyle={{
             zIndex: 3,
             //position: 'fixed',
-            gridRow: "1 / 2",
-            gridColumn: "1 / 2",
-            //bottom: 0,
-            width: "50%",
-            height: "50%",
+
             //minWidth: '50vh', minHeight: '50vh',
             backgroundColor: 'black'
           }}
           videoStyles={{
-            minWidth: '40%', minHeight: '20%',
+            minWidth: "100%", minHeight: "100%",
             visibility: this.state.videoVisible && 'visible' || 'hidden',
           }}
           videoStream={this.state.selectedVideo && this.state.selectedVideo.stream}
         />
+        </Paper>
+        <Paper varient="outlined" style={{display: "flex", justifyContent: "center", width: "100%", gridRow: "2 / 3", gridColumn: "1 / 2", height: "100%"}}>
+          <MonitorIcon style={{marginTop: "1vh"}}/>
+        </Paper>
+        <Paper variant="outlined" style={{
+          gridRow: "3 / 4",
+          gridColumn: "1 / 2",
+          width: "100%",
+          height: "100%",
+          padding: "2vh"
+        }}>
         <div // 사람들 화면 뜨는 곳
           style={{
-            gridRow: "2 / 3",
-            gridColumn: "1 / 2",
+            //gridRow: "2 / 3",
+            //gridColumn: "1 / 2",
             zIndex: 1,
             //position: 'fixed',
             //padding: '6px 3px',
@@ -136,6 +154,7 @@ class Videos extends Component {
         >
           { this.state.rVideos }
         </div>
+        </Paper>
       </div>
     )
   }
