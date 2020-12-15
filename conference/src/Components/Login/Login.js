@@ -16,7 +16,7 @@ class Login extends Component {
   tryLogin = () => {
     if (this.state.userName != "") {
       this.setState({islogin: true});
-      sessionStorage.setItem("nickname", this.state.userName);
+      localStorage.setItem("nickname", this.state.userName);
     } else {
       alert("닉네임을 정확히 입력해주세요.");
     }

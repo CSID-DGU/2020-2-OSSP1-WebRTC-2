@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import { Mainmenu } from '../Components';
 import useStyles from './useStyles';
 
-const nickname = sessionStorage.getItem("nickname");
+const nickname = localStorage.getItem("nickname");
 
 const Main = () => (
     <div>

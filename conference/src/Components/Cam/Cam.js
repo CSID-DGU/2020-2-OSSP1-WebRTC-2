@@ -7,7 +7,7 @@ import io from 'socket.io-client'
 import Video from './Video'
 import Videos from './Videos'
 import Chat from './Chat'
-import { Container } from '@material-ui/core';
+import { Container, TextField, Dialog, Button, Paper } from '@material-ui/core';
 
 
 class Cam extends Component {
@@ -15,6 +15,9 @@ class Cam extends Component {
     super(props)
 
     this.state = {
+      isNickname: false,
+      nickName: "",
+
       localStream: null,    // used to hold local stream object to avoid recreating the stream everytime a new offer comes
       remoteStream: null,    // used to hold remote stream object that is displayed in the main screen
 
@@ -45,7 +48,7 @@ class Cam extends Component {
     }
 
     // DONT FORGET TO CHANGE TO YOUR URL
-    this.serviceIP = 'https://localhost/webrtcPeer'
+    this.serviceIP = 'https://0cf7aaf055ed.ngrok.io/webrtcPeer'
 
     // https://reactjs.org/docs/refs-and-the-dom.html
     // this.localVideoref = React.createRef()
@@ -504,7 +507,20 @@ class Cam extends Component {
     stream.getTracks().forEach(track => track.stop())
   }
 
+  writeNickname = (event) => {
+    this.setState({nickName: event.target.value});
+  }
+
+  entryRoom = () => {
+    if (this.state.nickName != "") {
+      this.setState({isNickname: true});
+    } else {
+      alert("닉네임을 정확히 입력해주세요.");
+    }
+  }
+
   render() {
+    console.log(this.state.nickName);
     //???
     const {
       status,
@@ -533,10 +549,22 @@ class Cam extends Component {
     //console.log(this.state.localStream)
 
     const statusText = <div style={{ color: 'yellow', padding: 5 }}>{status}</div>
-
+    if (this.state.isNickname == false) {
+      return (
+        <Dialog open={!this.state.isNickname}>
+        <TextField required id="standard-required" label="닉네임을 입력하세요." defaultValue="Nickname"
+                   onChange={this.writeNickname}/>
+        <Button onClick={this.entryRoom}>입장하기</Button>
+      </Dialog>
+      );
+    }
     return (
-      <Container style={{display: "grid", gridTemplateRows: "1fr 1fr", gridTemplateColumns: "1fr 1fr"
+      <div style={{padding: "5vh"}}>
+
+      
+      <Paper variant="outlined" style={{display: "grid", padding: "1vh", gridTemplateRows: "1fr 1fr", gridTemplateColumns: "1fr 1fr"
                          ,width: "100%", height: "100%"}}>
+
       {/*<Draggable style={{
         zIndex: 101,
         //position: 'absolute',
@@ -545,7 +573,7 @@ class Cam extends Component {
       }}>
         
     </Draggable>*/}
-
+      <Paper variant="outlined" style={{padding: '2vh'}}>
         <Video
           videoType='localVideo'
           videoStyles={{
@@ -568,6 +596,8 @@ class Cam extends Component {
           videoStream={localStream}
           autoPlay muted>
         </Video>
+
+        </Paper>
       <div style={{
           zIndex: 3,
           position: 'absolute',
@@ -584,19 +614,20 @@ class Cam extends Component {
             borderRadius: 5,
           }}>{ statusText }</div>
       </div>
-      <Container style={{gridRow: '1 / 3', gridColumn: '1 / 2'}}>
+      <Paper variant='outlined' style={{padding: '2vh', gridRow: '1 / 3', gridColumn: '1 / 2'}}>
         <Videos
           switchVideo={this.switchVideo}
           remoteStreams={remoteStreams}
           // videoStream={this.state.selectedVideo && this.state.selectedVideo.stream}
         />
-      </Container>
+      </Paper>
 
+      <Paper variant='outlined' style={{padding: '2vh'}}>
         <Chat
           style={{gridRow: "1 / 2", gridColumn: "2 / 3"}}
             user={{
-              uid: this.socket && this.socket.id || ''
-              // 닉네임 던지기
+              uid: this.socket && this.socket.id || '',
+              unickname: this.state.nickName// 닉네임 던지기
           }}
           //변경사항 확인
           messages={messages}
@@ -611,7 +642,7 @@ class Cam extends Component {
             this.sendToPeer('new-message', JSON.stringify(message), {local: this.socket.id})
           }}
         />
-
+      </Paper>
         {/* <div style={{zIndex: 1, position: 'fixed'}} >
           <button onClick={this.createOffer}>Offer</button>
           <button onClick={this.createAnswer}>Answer</button>
@@ -621,7 +652,8 @@ class Cam extends Component {
         {/* <br />
         <button onClick={this.setRemoteDescription}>Set Remote Desc</button>
         <button onClick={this.addCandidate}>Add Candidate</button> */}
-      </Container>
+      </Paper>
+      </div>
     )
   }
 }

@@ -6,7 +6,7 @@ import { Paper, TextField } from'@material-ui/core';
 
 const Chat = props => {
   const [message, setMessage] = useState('')
-  const [user, setUser] = useState({ uid: 0, })
+  const [user, setUser] = useState({ uid: 0, unickname: ""})
   const [imageZoom, setImageZoom] = useState(false)
   const [selectedImage, setSelectedImage] = useState('')
 
@@ -17,7 +17,7 @@ const Chat = props => {
 
   useEffect(() => {
     scrollToBottom()
-    setUser({ uid: props.user.uid, })
+    setUser({ uid: props.user.uid, unickname: props.user.unickname })
   }, [props])
 
   const sendMessage = (msg) => {
@@ -28,7 +28,7 @@ const Chat = props => {
   const handleSubmit = event => {
     if (message === '') return
     event.preventDefault();
-    sendMessage({type:'text', message: { id: user.uid, sender: { uid: user.uid, }, data: { text: message } }})
+    sendMessage({type:'text', message: { id: user.uid, sender: { uid: user.uid, unickname: user.unickname }, data: { text: message } }})
     setMessage('')
   };
 
@@ -42,7 +42,7 @@ const Chat = props => {
 
     const msgDiv = data.type === 'text' && (
       <div className="msg">
-        <p>{message.sender.uid}</p>
+        <p>{message.sender.unickname}</p>
         <div className="message"> {message.data.text}</div>
       </div>
     ) || (
