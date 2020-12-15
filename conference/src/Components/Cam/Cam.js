@@ -8,7 +8,6 @@ import Video from './Video'
 import Videos from './Videos'
 import Chat from './Chat'
 import Draggable from './Draggable'
-import { Container } from '@material-ui/core';
 
 
 class Cam extends Component {
@@ -46,7 +45,7 @@ class Cam extends Component {
     }
 
     // DONT FORGET TO CHANGE TO YOUR URL
-    this.serviceIP = 'https://cdc1b834d481.ngrok.io/webrtcPeer'
+    this.serviceIP = 'https://628ea22cbeb8.ngrok.io/webrtcPeer'
 
     // https://reactjs.org/docs/refs-and-the-dom.html
     // this.localVideoref = React.createRef()
@@ -536,30 +535,26 @@ class Cam extends Component {
     const statusText = <div style={{ color: 'yellow', padding: 5 }}>{status}</div>
 
     return (
-      <Container style={{display: "grid", gridTemplateRows: "1fr 1fr", gridTemplateColumns: "1fr 1fr"
-                         ,width: "100%", height: "100%"}}>
-      {/*<Draggable style={{
+      <div>
+      <Draggable style={{
         zIndex: 101,
-        //position: 'absolute',
-        bottom: 0,
+        position: 'absolute',
+        right: 0,
         cursor: 'move'
       }}>
-        
-    </Draggable>*/}
-
         <Video
           videoType='localVideo'
           videoStyles={{
             // zIndex:2,
-            //position: 'absolute',
-            right:0,
-            width: "100%",
+            // position: 'absolute',
+            // right:0,
+            width: 200,
             // height: 200,
             // margin: 5,
             // backgroundColor: 'black'
           }}
           frameStyle={{
-            width: "100%",
+            width: 200,
             margin: 5,
             borderRadius: 5,
             backgroundColor: 'black',
@@ -569,7 +564,29 @@ class Cam extends Component {
           videoStream={localStream}
           autoPlay muted>
         </Video>
-      <div style={{
+      </Draggable>
+      {/* <Video
+          frameStyle={{
+            zIndex: 1,
+            position: 'fixed',
+            bottom: 0,
+            minWidth: '100%', minHeight: '100%',
+            backgroundColor: 'black'
+          }}
+        videoStyles={{
+          // zIndex: 1,
+          // position: 'fixed',
+          // bottom: 0,
+          minWidth: '100%',
+          minHeight: '100%',
+          // backgroundColor: 'black'
+        }}
+        // ref={ this.remoteVideoref }
+        videoStream={this.state.selectedVideo && this.state.selectedVideo.stream}
+        // autoPlay
+      ></Video> */}
+      <br />
+        <div style={{
           zIndex: 3,
           position: 'absolute',
           // margin: 10,
@@ -584,17 +601,17 @@ class Cam extends Component {
             padding: 10,
             borderRadius: 5,
           }}>{ statusText }</div>
-      </div>
-      <Container style={{gridRow: '1 / 3', gridColumn: '1 / 2'}}>
-        <Videos
-          switchVideo={this.switchVideo}
-          remoteStreams={remoteStreams}
-          // videoStream={this.state.selectedVideo && this.state.selectedVideo.stream}
-        />
-      </Container>
+        </div>
+        <div>
+          <Videos
+            switchVideo={this.switchVideo}
+            remoteStreams={remoteStreams}
+            // videoStream={this.state.selectedVideo && this.state.selectedVideo.stream}
+          ></Videos>
+        </div>
+        <br />
 
         <Chat
-          style={{gridRow: "1 / 2", gridColumn: "2 / 3"}}
             user={{
               uid: this.socket && this.socket.id || ''
           }}
@@ -621,7 +638,7 @@ class Cam extends Component {
         {/* <br />
         <button onClick={this.setRemoteDescription}>Set Remote Desc</button>
         <button onClick={this.addCandidate}>Add Candidate</button> */}
-      </Container>
+      </div>
     )
   }
 }
