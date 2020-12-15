@@ -16,7 +16,9 @@ class Participatemeeting extends Component {
         });
       }
     appClick = () => {
-        const inputURL = this.state.linkURL;
+        
+        const roomNum = this.state.linkURL;
+        const inputURL = "https://" + roomNum + ".ngrok.io/Cam";
         window.open(inputURL,"화상회의")       
     }
 
@@ -31,7 +33,7 @@ class Participatemeeting extends Component {
                 label="Put Address"
                 style={{ marginTop: 80 }}
                 onChange={this.appChange}
-                placeholder="ex) .......com"
+                placeholder="Put room code!"
                 helperText="주소를 정확히 입력해주세요."
                 fullWidth
                 margin="normal"
