@@ -10,7 +10,10 @@ import Explain from './Explain/Explain';
 import Participatemeeting from './Participatemeeting/Participatemeeting';
 import Profile from './Profile/Profile';
 
+console.log(sessionStorage);
+
 function TabPanel(props) {
+  console.log(props);
   const { children, value, index, ...other } = props;
 
   return (
@@ -63,25 +66,21 @@ export default function SimpleTabs() {
       <AppBar position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="홈" {...a11yProps(0)} />
-          <Tab label="미팅 개설하기" {...a11yProps(1)} />
-          <Tab label="미팅 참여하기" {...a11yProps(2)} />
-          <Tab label="녹화영상 보기" {...a11yProps(3)} />
-          <Tab label="프로필 변경하기" {...a11yProps(4)} />
+          <Tab label="미팅 참여하기" {...a11yProps(1)} />
+          <Tab label="녹화영상 보기" {...a11yProps(2)} />
+          <Tab label="프로필 변경하기" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
         <Explain/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        ㅋㅅㅋ
+        <Participatemeeting nickname={sessionStorage.getItem("nickname")}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Participatemeeting/>
-      </TabPanel>
-      <TabPanel value={value} index={3}>
         Item Three
       </TabPanel>
-      <TabPanel value={value} index={4}>
+      <TabPanel value={value} index={3}>
         <Profile />
       </TabPanel>
     </div>

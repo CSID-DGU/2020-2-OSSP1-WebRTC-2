@@ -22,7 +22,8 @@ class Participatemeeting extends Component {
         window.open(inputURL,"화상회의")       
     }
 
-    render() {        
+    render() {    
+        console.log(this.props);    
         return (
             <Container style={{textAlign: 'center', marginTop:'10vh'}}>
                 <h1>미팅 참여하기</h1>
