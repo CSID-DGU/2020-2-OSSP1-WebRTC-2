@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
-import { Paper, Divider } from '@material-ui/core';
+import { Button, Paper, Divider,Container } from '@material-ui/core';
 import Video from './Video'
 import { AiOutlineFullscreen } from "react-icons/ai";
+import SpeakerNotesOffIcon from '@material-ui/icons/SpeakerNotesOff';
+import CloseIcon from '@material-ui/icons/Close';
+
 // import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 class Videos extends Component {
@@ -126,14 +129,30 @@ class Videos extends Component {
     }
   } 
 
+  getOut = (_video) => {
+    alert("강제 퇴장시켰습니다.");
+    _video.setState({
+      selectedVideo: _video,
+      disconnected: true
+    })
+    this.stopTracks(this.state.selectedVideo.stream);
+    this.stopTracks(_video.stream);
+    this.stopTracks(_video.state.selectedVideo.stream);
+  }
+
+  forbidChat = (_video) => {
+    alert("채팅을 금지시켰습니다.");
+    this.setState({
+      selectedVideo: _video
+    })
+  }
+
   render() {
     return (
       <div style={{height: "100%", display: "grid", gridTemplateRows: "3% 47% 3% 47%", gridTemplateColumns: "1fr"}}>
         <Paper varient="outlined" style={{display: "flex", justifyContent: "center", width: "100%", gridRow: "1 / 2", gridColumn: "1 / 2", height: "100%"}}>
-          <AiOutlineFullscreen 
-                style={{marginTop: "1vh"}}
-                onClick={this.toggleFullScreen}
-                ></AiOutlineFullscreen>
+        <Button variant="contained" color="default" startIcon={<AiOutlineFullscreen />}  onClick={this.toggleFullScreen} style={{ display: "flex", justifyContent: "center", marginLeft: "10vh" }}>      전체화면
+      </Button>
         </Paper>
         <Paper variant="outlined" style={{
                       gridRow: "2 / 3",
@@ -151,7 +170,6 @@ class Videos extends Component {
           frameStyle={{
             zIndex: 3,
             //position: 'fixed',
-
             //minWidth: '50vh', minHeight: '50vh',
             backgroundColor: 'black'
           }}
@@ -163,7 +181,14 @@ class Videos extends Component {
         />
         </Paper>
         <Paper varient="outlined" style={{display: "flex", justifyContent: "center", width: "100%", gridRow: "3 / 4", gridColumn: "1 / 2", height: "100%"}}>
-      
+        <Container style={{ display: "flex", justifyContent: "center" }}>
+              <Button variant="contained" color="default" startIcon={<CloseIcon />} onClick={this.getOut} style={{ justifyContent: "center" }}
+              >        강제 퇴장
+      </Button>
+              <Button variant="contained" color="default" startIcon={<SpeakerNotesOffIcon />} onClick={this.forbidChat} style={{ marginLeft: "1vh" }}
+              >        채팅 금지
+      </Button>
+            </Container>
         </Paper>
         <Paper variant="outlined" style={{
           gridRow: "4 / 5",

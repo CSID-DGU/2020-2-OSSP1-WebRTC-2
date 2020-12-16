@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import logo from '../../image/logo.png';
 import { Grid, Container, CssBaseline,TextField, Link, Button, Dialog } from '@material-ui/core';
-import axios from 'axios';
 
 class Login extends Component {
   constructor() {
