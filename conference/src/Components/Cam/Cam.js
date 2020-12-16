@@ -54,7 +54,6 @@ class Cam extends Component {
     }
 
     // DONT FORGET TO CHANGE TO YOUR URL
-    this.serviceIP = 'https://c191ca613c8d.ngrok.io/webrtcPeer'
 
     // https://reactjs.org/docs/refs-and-the-dom.html
     // this.localVideoref = React.createRef()
@@ -191,12 +190,6 @@ class Cam extends Component {
           remoteStreams = [...this.state.remoteStreams, remoteVideo]
         }
 
-        // const remoteVideo = {
-        //   id: socketID,
-        //   name: socketID,
-        //   stream: e.streams[0]
-        // }
-
         this.setState(prevState => {
 
           // If we already have a stream in display let it stay the same, otherwise use the latest stream
@@ -302,13 +295,6 @@ class Cam extends Component {
       )
     })
 
-    // this.socket.on('offerOrAnswer', (sdp) => {
-
-    //   this.textref.value = JSON.stringify(sdp)
-
-    //   // set sdp as remote description
-    //   this.pc.setRemoteDescription(new RTCSessionDescription(sdp))
-    // })
 
     this.socket.on('online-peer', socketID => {
       console.log('connected peers ...', socketID)
@@ -447,54 +433,6 @@ class Cam extends Component {
         pc.addIceCandidate(new RTCIceCandidate(data.candidate))
     })
 
-    // const pc_config = null
-
-    // const pc_config = {
-    //   "iceServers": [
-    //     // {
-    //     //   urls: 'stun:[STUN_IP]:[PORT]',
-    //     //   'credentials': '[YOR CREDENTIALS]',
-    //     //   'username': '[USERNAME]'
-    //     // },
-    //     {
-    //       urls : 'stun:stun.l.google.com:19302'
-    //     }
-    //   ]
-    // }
-
-    // https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection
-    // create an instance of RTCPeerConnection
-    // this.pc = new RTCPeerConnection(this.state.pc_config)
-
-    // triggered when a new candidate is returned
-    // this.pc.onicecandidate = (e) => {
-    //   // send the candidates to the remote peer
-    //   // see addCandidate below to be triggered on the remote peer
-    //   if (e.candidate) {
-    //     // console.log(JSON.stringify(e.candidate))
-    //     this.sendToPeer('candidate', e.candidate)
-    //   }
-    // }
-
-    // triggered when there is a change in connection state
-    // this.pc.oniceconnectionstatechange = (e) => {
-    //   console.log(e)
-    // }
-
-    // triggered when a stream is added to pc, see below - this.pc.addStream(stream)
-    // this.pc.onaddstream = (e) => {
-    //   this.remoteVideoref.current.srcObject = e.stream
-    // }
-
-    // this.pc.ontrack = (e) => {
-    //   debugger
-    //   // this.remoteVideoref.current.srcObject = e.streams[0]
-
-    //   this.setState({
-    //     remoteStream: e.streams[0]
-    //   })
-    // }
-
   }
 
   // ************************************* //
@@ -591,6 +529,8 @@ class Cam extends Component {
       }}>
         
     </Draggable>*/}
+
+
       {/* 내얼굴 */}
       <Paper variant="outlined" style={{padding: '2vh'}}>
         <Video
@@ -617,6 +557,8 @@ class Cam extends Component {
         </Video>
           <Button onClick={this.shareScreen}>화면 공유하기</Button>
         </Paper>
+
+      
       <div style={{
           zIndex: 5,
           position: 'absolute',
@@ -626,13 +568,16 @@ class Cam extends Component {
           // borderRadius: 5,
         }}>
           <i onClick={(e) => {this.setState({disconnected: true})}} style={{ cursor: 'pointer', paddingLeft: 15, color: 'red' }} class='material-icons'>highlight_off</i>
-          <div style={{
+          <div style={{ //please wait 사람수 check
             margin: 10,
             backgroundColor: '#cdc4ff4f',
             padding: 10,
             borderRadius: 5,
           }}>{ statusText }</div>
       </div>
+
+
+      
       <Paper style={{gridRow: '1 / 3', gridColumn: '1 / 2'}}>
         <Videos
           switchVideo={this.switchVideo}
@@ -641,9 +586,9 @@ class Cam extends Component {
         />
       </Paper>
 
-      <Paper variant='outlined' style={{padding: '2vh'}}>
+      <Paper variant='outlined' style={{padding: '2vh', backgroundColor: "#EAF1F6"}}>
         <Chat
-          style={{gridRow: "1 / 2", gridColumn: "2 / 3"}}
+          style={{gridRow: "1 / 2", gridColumn: "2 / 3", backgroundColor: "#EAF1F6"}}
             user={{
               uid: this.socket && this.socket.id || '',
               unickname: this.state.nickName// 닉네임 던지기
