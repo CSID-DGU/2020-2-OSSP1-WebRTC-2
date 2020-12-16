@@ -6,7 +6,7 @@ import Video from './Video'
 import Videos from './Videos'
 import Chat from './Chat'
 import { Container, TextField, Dialog, Button, Paper } from '@material-ui/core';
-import {MdExitToApp, MdScreenShare} from "react-icons/md";
+import { MdExitToApp, MdScreenShare } from "react-icons/md";
 import Board from './Board';
 import EventSeatIcon from '@material-ui/icons/EventSeat';
 import ScreenShareIcon from '@material-ui/icons/ScreenShare';
@@ -461,11 +461,11 @@ class Cam extends Component {
   stopTracks = (stream) => {
     stream.getTracks().forEach(track => track.stop())
   }
-//닉네임
+  //닉네임
   writeNickname = (event) => {
     this.setState({ nickName: event.target.value });
   }
-//닉네임쓰고 입장
+  //닉네임쓰고 입장
   entryRoom = () => {
     if (this.state.nickName != "") {
       this.setState({ isNickname: true });
@@ -473,14 +473,14 @@ class Cam extends Component {
       alert("닉네임을 정확히 입력해주세요.");
     }
   }
-//화면공유
+  //화면공유
   shareScreen = () => {
     this.setState({ screenShare: !this.state.screenShare });
     this.getLocalStream();
   }
   //화이트보드
   drawWhiteboard = () => {
-    <Route exact path="/board" component={Board}/>
+    <Route exact path="/board" component={Board} />
     window.open("/board");
   }
 
@@ -536,63 +536,58 @@ class Cam extends Component {
 
 
 
-      {/* 내얼굴 */}
-      <Paper variant="outlined" style={{padding: '2vh'}}>
-        
+          {/* 내얼굴 */}
+          <Paper variant="outlined" style={{ padding: '2vh' }}>
+            <Video
+              videoType='localVideo'
+              videoStyles={{
+                // zIndex:2,
+                //position: 'absolute',
+                right: 0,
+                width: "100%",
+                // height: 200,
+                // margin: 5,
+                // backgroundColor: 'black'
+              }}
+              frameStyle={{
+                width: "100%",
+                margin: 5,
+                borderRadius: 5,
+                backgroundColor: 'black',
+              }}
+              showMuteControls={true}
+              // ref={this.localVideoref}
+              videoStream={localStream}
+              autoPlay muted>
+            </Video>
 
 
-        <Video
-          videoType='localVideo'
-          videoStyles={{
-            // zIndex:2,
-            //position: 'absolute',
-            right:0,
-            width: "100%",
-            // height: 200,
-            // margin: 5,
-            // backgroundColor: 'black'
-          }}
-          frameStyle={{
-            width: "100%",
-            margin: 5,
-            borderRadius: 5,
-            backgroundColor: 'black',
-          }}
-          showMuteControls={true}
-          // ref={this.localVideoref}
-          videoStream={localStream}
-          autoPlay muted>
-        </Video>
-        
-      
-      <Button variant="contained" color="default"  startIcon={<ScreenShareIcon />} onClick={this.shareScreen} 
-      >        화면 공유
+            <Button variant="contained" color="default" startIcon={<ScreenShareIcon />} onClick={this.shareScreen}
+            >        화면 공유
+      </Button>
+            <Button variant="contained" color="default" startIcon={<BrushIcon />} onClick={this.drawWhiteboard} style={{ marginLeft: "1vh" }}
+            >        화이트 보드
+      </Button>
+            <Button variant="contained" color="default" startIcon={<EventSeatIcon />} style={{ marginLeft: "1vh" }}
+            //disabled //교수의 경우 이 기능이 필요가 없다!
+            >        자리비움 요청
       </Button>
 
-      <Button variant="contained" color="default"  startIcon={<BrushIcon />} onClick = {this.drawWhiteboard} style = {{marginLeft:"1vh"}}
-      >        화이트 보드
-      </Button>
-      <Button variant="contained" color="default"  startIcon={<EventSeatIcon />} style = {{marginLeft:"1vh"}}
-       //disabled //교수의 경우 이 기능이 필요가 없다!
-      >        자리비움 요청
-      </Button>
 
-      
           </Paper>
 
-      
-      <div style={{
-          zIndex: 5,
-          position: 'absolute',
-          // margin: 10,
-          // backgroundColor: '#cdc4ff4f',
-          // padding: 10,
-          // borderRadius: 5,
-        }}>
-  
-          <MdExitToApp size={25}
-                onClick={(e) => {this.setState({disconnected: true})}}
-                ></MdExitToApp>
+
+          <div style={{
+            zIndex: 5,
+            position: 'absolute',
+            // margin: 10,
+            // backgroundColor: '#cdc4ff4f',
+            // padding: 10,
+            // borderRadius: 5,
+          }}>
+ <Button variant="contained" color="default" startIcon={<MdExitToApp />} onClick={(e) => { this.setState({ disconnected: true }) }} style={{ marginLeft: "1vh" }}
+            >      나가기
+      </Button>
             {/* <MdExitToApp size={25}
               onClick={() => { alert('미팅룸을 나갑니다') }}
             ></MdExitToApp> */}

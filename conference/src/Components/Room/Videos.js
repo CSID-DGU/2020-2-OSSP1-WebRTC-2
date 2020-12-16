@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Paper, Divider } from '@material-ui/core';
+import { Button, Paper, Divider } from '@material-ui/core';
 import Video from './Video'
 import { AiOutlineFullscreen } from "react-icons/ai";
 // import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -129,11 +129,10 @@ class Videos extends Component {
   render() {
     return (
       <div style={{height: "100%", display: "grid", gridTemplateRows: "3% 47% 3% 47%", gridTemplateColumns: "1fr"}}>
-        <Paper varient="outlined" style={{display: "flex", justifyContent: "center", width: "100%", gridRow: "1 / 2", gridColumn: "1 / 2", height: "100%"}}>
-          <AiOutlineFullscreen 
-                style={{marginTop: "1vh"}}
-                onClick={this.toggleFullScreen}
-                ></AiOutlineFullscreen>
+        <Paper varient="outlined" style={{display: "flex", width: "100%", gridRow: "1 / 2", gridColumn: "1 / 2", height: "100%"}}>
+        <Button variant="contained" color="default" startIcon={<AiOutlineFullscreen />}  onClick={this.toggleFullScreen} style={{ marginLeft: "12vh" }}
+            >      전체화면
+      </Button>
         </Paper>
         <Paper variant="outlined" style={{
                       gridRow: "2 / 3",
