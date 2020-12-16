@@ -12,7 +12,7 @@ import EventSeatIcon from '@material-ui/icons/EventSeat';
 import ScreenShareIcon from '@material-ui/icons/ScreenShare';
 import BrushIcon from '@material-ui/icons/Brush';
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
-import IoPersonCircleOutline from "react-icons/io"
+import Alert from './Alert';
 
 class Cam extends Component {
   constructor(props) {
@@ -21,6 +21,7 @@ class Cam extends Component {
     this.state = {
       nickName: sessionStorage.getItem("userid"),
       userstatus: sessionStorage.getItem("userstatus"),
+      alertm: false,
       screenShare: false,
       emptySeat: false, //안눌렸을 경우 그대로 화면 송출 -> 기본 | 눌렸을 경우 자리비움 표시
       
@@ -59,7 +60,7 @@ class Cam extends Component {
     }
 
     // DONT FORGET TO CHANGE TO YOUR URL
-    this.serviceIP = 'https://872c39790cc1.ngrok.io/room/webrtcPeer'
+    this.serviceIP = 'https://3aad7c2f92f5.ngrok.io/webrtcPeer'
 
     // https://reactjs.org/docs/refs-and-the-dom.html
     // this.localVideoref = React.createRef()
@@ -501,7 +502,7 @@ class Cam extends Component {
   }
   
   alertMessage = () => {
-    alert("알림 메시지 임시");
+    this.setState({alertm: !this.state.alertm});
   }
 
   render() {
@@ -599,6 +600,10 @@ class Cam extends Component {
               <Button variant="contained" color="primary" startIcon={<NewReleasesIcon />} onClick={this.alertMessage} style={{marginLeft: "1vh" }}
               >        알림 메시지
       </Button>
+              {this.state.alertm && <Dialog open={this.state.alertm} onClose={this.alertMessage}>
+                <Alert></Alert>
+                </Dialog>}
+              
             </Container>
 
           </Paper>
