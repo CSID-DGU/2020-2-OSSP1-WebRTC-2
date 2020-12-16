@@ -86,11 +86,12 @@ const Chat = props => {
   }
 
   return (
-    <div>
+    <div >
       {imageZoom && showEnlargedImage(selectedImage)}
 
       <Paper elevation={3} className="chatWindow" style={{
         zIndex: 10,
+        backgroundColor: "#EAF1F6",
         //position: 'absolute',
         //right: 5,
         //top: 190,
@@ -99,18 +100,7 @@ const Chat = props => {
         //width: 350,
         height: "50vh",
     }}>
-      <Paper>
-            <form onSubmit={handleSubmit}>
-              <TextField
-                className="textarea input"
-                type="text"
-                placeholder="Enter your message..."
-                onChange={handleChange}
-                value={message}
-                style={{width:"100%"}}
-              />
-            </form>
-      </Paper>
+     
         <ul className="chat" id="chatList">
           {props.messages.map(data => (
             <Paper square elevation={2} style={{width: "95%", marginBottom: "1vh"}}>
@@ -120,6 +110,10 @@ const Chat = props => {
             </Paper>
           ))}
         </ul>
+        <Paper>
+        
+        
+  </Paper>
         <DragDrop
           className="chatInputWrapper"
           sendFiles={(files) => {
@@ -139,7 +133,27 @@ const Chat = props => {
         >
         </DragDrop>
       </Paper>
+      <div>
+      <form onSubmit={handleSubmit} 
+        style={{
+        }
+        }>
+          <TextField
+          //전송 메세지 입력하는 곳
+            className="textarea input"
+            type="text"
+            placeholder="보낼 메세지를 입력하세요"
+            onChange={handleChange}
+            value={message}
+            style={{
+              backgroundColor: "white",
+              paddingTop:"20px",
+              width:"100%"}}
+          />
+        </form>
       </div>
+      </div>
+      
     )
 }
 
