@@ -34,6 +34,7 @@
  $ cd conference
  $ npm install -g bower
  $ bower install kurento-client  
+ $ npm install react-icons --save
  ```  
  #
  
@@ -74,6 +75,4 @@ srp 이용해서 서버에 올리기 scp -r -i test.pem
 ![aws_apache](https://user-images.githubusercontent.com/46514182/101172671-788f5200-360f-11eb-9c92-37e9eff9bf29.png)
 ![lastpang](https://user-images.githubusercontent.com/46514182/101172673-79c07f00-360f-11eb-8bc9-c10d3cfdbcd8.png)
 
-```
-react icon - npm install react-icons --save
-```
+
