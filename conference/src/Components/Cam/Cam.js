@@ -54,7 +54,6 @@ class Cam extends Component {
     }
 
     // DONT FORGET TO CHANGE TO YOUR URL
-    this.serviceIP = 'https://c191ca613c8d.ngrok.io/webrtcPeer'
 
     // https://reactjs.org/docs/refs-and-the-dom.html
     // this.localVideoref = React.createRef()
@@ -191,12 +190,6 @@ class Cam extends Component {
           remoteStreams = [...this.state.remoteStreams, remoteVideo]
         }
 
-        // const remoteVideo = {
-        //   id: socketID,
-        //   name: socketID,
-        //   stream: e.streams[0]
-        // }
-
         this.setState(prevState => {
 
           // If we already have a stream in display let it stay the same, otherwise use the latest stream
@@ -302,13 +295,6 @@ class Cam extends Component {
       )
     })
 
-    // this.socket.on('offerOrAnswer', (sdp) => {
-
-    //   this.textref.value = JSON.stringify(sdp)
-
-    //   // set sdp as remote description
-    //   this.pc.setRemoteDescription(new RTCSessionDescription(sdp))
-    // })
 
     this.socket.on('online-peer', socketID => {
       console.log('connected peers ...', socketID)
@@ -446,54 +432,6 @@ class Cam extends Component {
       if (pc)
         pc.addIceCandidate(new RTCIceCandidate(data.candidate))
     })
-
-    // const pc_config = null
-
-    // const pc_config = {
-    //   "iceServers": [
-    //     // {
-    //     //   urls: 'stun:[STUN_IP]:[PORT]',
-    //     //   'credentials': '[YOR CREDENTIALS]',
-    //     //   'username': '[USERNAME]'
-    //     // },
-    //     {
-    //       urls : 'stun:stun.l.google.com:19302'
-    //     }
-    //   ]
-    // }
-
-    // https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection
-    // create an instance of RTCPeerConnection
-    // this.pc = new RTCPeerConnection(this.state.pc_config)
-
-    // triggered when a new candidate is returned
-    // this.pc.onicecandidate = (e) => {
-    //   // send the candidates to the remote peer
-    //   // see addCandidate below to be triggered on the remote peer
-    //   if (e.candidate) {
-    //     // console.log(JSON.stringify(e.candidate))
-    //     this.sendToPeer('candidate', e.candidate)
-    //   }
-    // }
-
-    // triggered when there is a change in connection state
-    // this.pc.oniceconnectionstatechange = (e) => {
-    //   console.log(e)
-    // }
-
-    // triggered when a stream is added to pc, see below - this.pc.addStream(stream)
-    // this.pc.onaddstream = (e) => {
-    //   this.remoteVideoref.current.srcObject = e.stream
-    // }
-
-    // this.pc.ontrack = (e) => {
-    //   debugger
-    //   // this.remoteVideoref.current.srcObject = e.streams[0]
-
-    //   this.setState({
-    //     remoteStream: e.streams[0]
-    //   })
-    // }
 
   }
 
