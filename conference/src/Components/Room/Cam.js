@@ -8,7 +8,9 @@ import Chat from './Chat'
 import { Container, TextField, Dialog, Button, Paper } from '@material-ui/core';
 import {MdExitToApp, MdScreenShare} from "react-icons/md";
 import Board from './Board';
-import { IoIosBrush } from "react-icons/io";
+import EventSeatIcon from '@material-ui/icons/EventSeat';
+import ScreenShareIcon from '@material-ui/icons/ScreenShare';
+import BrushIcon from '@material-ui/icons/Brush';
 
 
 class Cam extends Component {
@@ -536,10 +538,9 @@ class Cam extends Component {
 
       {/* 내얼굴 */}
       <Paper variant="outlined" style={{padding: '2vh'}}>
-        <IoIosBrush
-        style = {{marginTop:"1vh"}}
-        onClick = {this.drawWhiteboard}
-        ></IoIosBrush>
+        
+
+
         <Video
           videoType='localVideo'
           videoStyles={{
@@ -562,8 +563,21 @@ class Cam extends Component {
           videoStream={localStream}
           autoPlay muted>
         </Video>
-          <MdScreenShare size={25} onClick={this.shareScreen}>화면 공유하기</MdScreenShare>
-        </Paper>
+        
+      
+      <Button variant="contained" color="default"  startIcon={<ScreenShareIcon />} onClick={this.shareScreen} 
+      >        화면 공유
+      </Button>
+
+      <Button variant="contained" color="default"  startIcon={<BrushIcon />} onClick = {this.drawWhiteboard} style = {{marginLeft:"1vh"}}
+      >        화이트 보드
+      </Button>
+      <Button variant="contained" color="default"  startIcon={<EventSeatIcon />} style = {{marginLeft:"1vh"}}
+      >        자리비움 요청
+      </Button>
+
+      
+          </Paper>
 
       
       <div style={{
