@@ -102,7 +102,7 @@ const Chat = props => {
     }}>
      
 
-        <ul className="chat" id="chatList" >
+        <ul className="chat" id="chatList" style={{overflow : "auto"}}>
           {props.messages.map(data => (
             <Paper square elevation={2} style={{
               width: "95%", 
@@ -113,7 +113,7 @@ const Chat = props => {
               borderRight: "0px solid transparent",
               borderBottom: "0px solid transparent",
               }}>
-            <div key={data.id} style={{overflow : 'auto'}}>
+            <div key={data.id} style={{overflow : "scroll"}}>
               {user.uid === data.message.sender.uid ? renderMessage('self', data) : (renderMessage('other', data))}
             </div>
             </Paper>

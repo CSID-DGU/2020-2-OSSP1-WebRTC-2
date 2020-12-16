@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import io from 'socket.io-client'
 //import './App.css';
-
 //import Video from './Components/Video/Video'
 //import Videos from './Components/Video/Videos'
 import Video from './Video'
@@ -556,7 +555,6 @@ class Cam extends Component {
           videoStream={localStream}
           autoPlay muted>
         </Video>
-        
           <MdScreenShare size={25} onClick={this.shareScreen}>화면 공유하기</MdScreenShare>
         </Paper>
 
