@@ -561,18 +561,18 @@ class Cam extends Component {
               autoPlay muted>
             </Video>
 
-
-            <Button variant="contained" color="default" startIcon={<ScreenShareIcon />} onClick={this.shareScreen}
-            >        화면 공유
+            <Container style={{ display: "flex", justifyContent: "center" }}>
+              <Button variant="contained" color="default" startIcon={<ScreenShareIcon />} onClick={this.shareScreen} style={{ justifyContent: "center" }}
+              >        화면 공유
       </Button>
-            <Button variant="contained" color="default" startIcon={<BrushIcon />} onClick={this.drawWhiteboard} style={{ marginLeft: "1vh" }}
-            >        화이트 보드
+              <Button variant="contained" color="default" startIcon={<BrushIcon />} onClick={this.drawWhiteboard} style={{ marginLeft: "1vh" }}
+              >        화이트 보드
       </Button>
-            <Button variant="contained" color="default" startIcon={<EventSeatIcon />} style={{ marginLeft: "1vh" }}
-            //disabled //교수의 경우 이 기능이 필요가 없다!
-            >        자리비움 요청
+              <Button variant="contained" color="default" startIcon={<EventSeatIcon />} style={{ marginLeft: "1vh" }}
+              //disabled //교수의 경우 이 기능이 필요가 없다!
+              >        자리비움 요청
       </Button>
-
+            </Container>
 
           </Paper>
 
@@ -585,9 +585,11 @@ class Cam extends Component {
             // padding: 10,
             // borderRadius: 5,
           }}>
- <Button variant="contained" color="default" startIcon={<MdExitToApp />} onClick={(e) => { this.setState({ disconnected: true }) }} style={{ marginLeft: "1vh" }}
+            <Container style={{ display: "flex", justifyContent: "center"}}>
+            <Button variant="contained" color="default" startIcon={<MdExitToApp />} onClick={(e) => { this.setState({ disconnected: true }) }} style={{ display: "flex", justifyContent: "center", marginLeft: "34vh" }}
             >      나가기
       </Button>
+      </Container>
             {/* <MdExitToApp size={25}
               onClick={() => { alert('미팅룸을 나갑니다') }}
             ></MdExitToApp> */}
