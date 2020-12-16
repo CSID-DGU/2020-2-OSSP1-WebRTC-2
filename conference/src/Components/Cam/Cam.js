@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client'
-//import './App.css';
-//import Video from './Components/Video/Video'
-//import Videos from './Components/Video/Videos'
+import { Route } from 'react-router-dom';
+
 import Video from './Video'
 import Videos from './Videos'
 import Chat from './Chat'
 import { Container, TextField, Dialog, Button, Paper } from '@material-ui/core';
-import { MdExitToApp, MdScreenShare } from "react-icons/md";
+import {MdExitToApp, MdScreenShare} from "react-icons/md";
+import Board from './Board';
+import { IoIosBrush } from "react-icons/io";
+
 
 class Cam extends Component {
   constructor(props) {
@@ -53,7 +55,8 @@ class Cam extends Component {
     }
 
     // DONT FORGET TO CHANGE TO YOUR URL
-    this.serviceIP = ' https://cb253b3fe56b.ngrok.io/webrtcPeer'
+    this.serviceIP = 'https://57e8c029fd8a.ngrok.io/webrtcPeer'
+
     // https://reactjs.org/docs/refs-and-the-dom.html
     // this.localVideoref = React.createRef()
     // this.remoteVideoref = React.createRef()
@@ -456,11 +459,11 @@ class Cam extends Component {
   stopTracks = (stream) => {
     stream.getTracks().forEach(track => track.stop())
   }
-
+//닉네임
   writeNickname = (event) => {
     this.setState({ nickName: event.target.value });
   }
-
+//닉네임쓰고 입장
   entryRoom = () => {
     if (this.state.nickName != "") {
       this.setState({ isNickname: true });
@@ -468,10 +471,15 @@ class Cam extends Component {
       alert("닉네임을 정확히 입력해주세요.");
     }
   }
-
+//화면공유
   shareScreen = () => {
     this.setState({ screenShare: !this.state.screenShare });
     this.getLocalStream();
+  }
+  //화이트보드
+  drawWhiteboard = () => {
+    <Route exact path="/board" component={Board}/>
+    window.open("/board");
   }
 
   render() {
@@ -534,43 +542,49 @@ class Cam extends Component {
     </Draggable>*/}
 
 
-          {/* 내얼굴 */}
-          <Paper variant="outlined" style={{ padding: '2vh' }}>
-            <Video
-              videoType='localVideo'
-              videoStyles={{
-                // zIndex:2,
-                //position: 'absolute',
-                right: 0,
-                width: "100%",
-                // height: 200,
-                // margin: 5,
-                // backgroundColor: 'black'
-              }}
-              frameStyle={{
-                width: "100%",
-                margin: 5,
-                borderRadius: 5,
-                backgroundColor: 'black',
-              }}
-              showMuteControls={true}
-              // ref={this.localVideoref}
-              videoStream={localStream}
-              autoPlay muted>
-            </Video>
-            <MdScreenShare size={25} onClick={this.shareScreen}>화면 공유하기</MdScreenShare>
-          </Paper>
 
+      {/* 내얼굴 */}
+      <Paper variant="outlined" style={{padding: '2vh'}}>
+        <IoIosBrush
+        style = {{marginTop:"1vh"}}
+        onClick = {this.drawWhiteboard}
+        ></IoIosBrush>
+        <Video
+          videoType='localVideo'
+          videoStyles={{
+            // zIndex:2,
+            //position: 'absolute',
+            right:0,
+            width: "100%",
+            // height: 200,
+            // margin: 5,
+            // backgroundColor: 'black'
+          }}
+          frameStyle={{
+            width: "100%",
+            margin: 5,
+            borderRadius: 5,
+            backgroundColor: 'black',
+          }}
+          showMuteControls={true}
+          // ref={this.localVideoref}
+          videoStream={localStream}
+          autoPlay muted>
+        </Video>
+          <MdScreenShare size={25} onClick={this.shareScreen}>화면 공유하기</MdScreenShare>
+        </Paper>
 
-          <div style={{
-            zIndex: 5,
-            position: 'absolute',
-            // margin: 10,
-            // backgroundColor: '#cdc4ff4f',
-            // padding: 10,
-            // borderRadius: 5,
-          }}>
-<MdExitToApp size={25}
+      
+      <div style={{
+          zIndex: 5,
+          position: 'absolute',
+          // margin: 10,
+          // backgroundColor: '#cdc4ff4f',
+          // padding: 10,
+          // borderRadius: 5,
+        }}>
+  
+          <MdExitToApp size={25}
                 onClick={(e) => {this.setState({disconnected: true})}}
                 ></MdExitToApp>
             {/* <MdExitToApp size={25}

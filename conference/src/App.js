@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Home, Main, Signup } from './pages';
 import { CompleteRegister } from './Components/Register/CompleteRegister';
 import { Route } from 'react-router-dom';
-import { Cam } from './Components/Cam'
+import { Cam } from './Components/Cam';
+import  Board  from './Components/Cam/Board'
 
 class App extends Component {
     render() {      
@@ -13,6 +14,7 @@ class App extends Component {
                 <Route exact path="/completeregister" component={CompleteRegister} />
                 <Route path="/main" component={Main}/>
                 <Route path="/cam" component={Cam}/>
+                <Route path="/board" component={Board}/>
             </div>
         );
     };
