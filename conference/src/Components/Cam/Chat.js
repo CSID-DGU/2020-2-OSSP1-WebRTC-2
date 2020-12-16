@@ -106,10 +106,13 @@ const Chat = props => {
           {props.messages.map(data => (
             <Paper square elevation={2} style={{
               width: "95%", 
+              float: "left",
               marginBottom: "1vh", 
               borderRadius:"10px",
-              borderTop: "15px",
-              borderLeft: "15px"}}>
+              borderLeft: "15px solid transparent",
+              borderRight: "0px solid transparent",
+              borderBottom: "0px solid transparent",
+              }}>
             <div key={data.id} style={{overflow : 'auto'}}>
               {user.uid === data.message.sender.uid ? renderMessage('self', data) : (renderMessage('other', data))}
             </div>
