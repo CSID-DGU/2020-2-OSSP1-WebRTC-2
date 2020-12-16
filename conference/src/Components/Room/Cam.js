@@ -11,8 +11,8 @@ import Board from './Board';
 import EventSeatIcon from '@material-ui/icons/EventSeat';
 import ScreenShareIcon from '@material-ui/icons/ScreenShare';
 import BrushIcon from '@material-ui/icons/Brush';
+import NewReleasesIcon from '@material-ui/icons/NewReleases';
 import IoPersonCircleOutline from "react-icons/io"
-
 
 class Cam extends Component {
   constructor(props) {
@@ -499,6 +499,10 @@ class Cam extends Component {
     <Route exact path="/board" component={Board} />
     window.open("/board");
   }
+  
+  alertMessage = () => {
+    alert("알림 메시지 임시");
+  }
 
   render() {
     console.log(this.state);
@@ -586,6 +590,9 @@ class Cam extends Component {
               <Button variant="contained" color="default" startIcon={<EventSeatIcon />} onClick={this.emptySeat} style={{ marginLeft: "1vh" }}
               //disabled //교수의 경우 이 기능이 필요가 없다!
               >        자리비움
+      </Button>
+              <Button variant="contained" color="default" startIcon={<NewReleasesIcon />} onClick={this.alertMessage} style={{ marginLeft: "1vh" }}
+              >        알림 메시지
       </Button>
             </Container>
 
