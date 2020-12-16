@@ -55,7 +55,7 @@ class Cam extends Component {
     }
 
     // DONT FORGET TO CHANGE TO YOUR URL
-    this.serviceIP = 'https://42133bc70db1.ngrok.io/webrtcPeer'
+    this.serviceIP = 'https://872c39790cc1.ngrok.io/webrtcPeer'
 
     // https://reactjs.org/docs/refs-and-the-dom.html
     // this.localVideoref = React.createRef()
