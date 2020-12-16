@@ -569,6 +569,7 @@ class Cam extends Component {
           // borderRadius: 5,
         }}>
           <i onClick={(e) => {this.setState({disconnected: true})}} style={{ cursor: 'pointer', paddingLeft: 15, color: 'red' }} class='material-icons'>highlight_off</i>
+          <Button onClick={this.shareScreen}>나가기 버튼</Button>
           <div style={{ //please wait 사람수 check
             margin: 10,
             backgroundColor: '#cdc4ff4f',
