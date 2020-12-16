@@ -9,8 +9,10 @@ import Box from '@material-ui/core/Box';
 import Explain from './Explain/Explain';
 import Participatemeeting from './Participatemeeting/Participatemeeting';
 import Profile from './Profile/Profile';
+import Background from '../image/background.jpg';
 
-console.log(localStorage);
+
+console.log(sessionStorage);
 
 function TabPanel(props) {
   console.log(props);
@@ -62,7 +64,7 @@ export default function SimpleTabs() {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={{width: "100%", height: "100vh", backgroundImage: "url(" + Background + ")"}}>
       <AppBar position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="홈" {...a11yProps(0)} />
