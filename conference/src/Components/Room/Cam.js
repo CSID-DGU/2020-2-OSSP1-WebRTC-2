@@ -59,11 +59,7 @@ class Cam extends Component {
     }
 
     // DONT FORGET TO CHANGE TO YOUR URL
-<<<<<<< HEAD
     this.serviceIP = 'https://872c39790cc1.ngrok.io/room/webrtcPeer'
-=======
-    this.serviceIP = ' https://1e4540ade5fb.ngrok.io/webrtcPeer'
->>>>>>> 32edf27e8e335ed0310ab97118dabe41a145deed
 
     // https://reactjs.org/docs/refs-and-the-dom.html
     // this.localVideoref = React.createRef()
@@ -593,7 +589,6 @@ class Cam extends Component {
               <Button variant="contained" color="primary" startIcon={<BrushIcon />} onClick={this.drawWhiteboard} style={{marginLeft: "1vh" }}
               >        화이트 보드
       </Button>
-<<<<<<< HEAD
               {this.state.userstatus === "0" ? 
               <Button variant="contained" color="default" startIcon={<EventSeatIcon />} style={{marginLeft: "1vh" }}
               disabled //교수의 경우 이 기능이 필요가 없다!
@@ -602,13 +597,6 @@ class Cam extends Component {
               >        자리비움 요청
       </Button> }
               <Button variant="contained" color="primary" startIcon={<NewReleasesIcon />} onClick={this.alertMessage} style={{marginLeft: "1vh" }}
-=======
-              <Button variant="contained" color="default" startIcon={<EventSeatIcon />} onClick={this.emptySeat} style={{ marginLeft: "1vh" }}
-              //disabled //교수의 경우 이 기능이 필요가 없다!
-              >        자리비움
-      </Button>
-              <Button variant="contained" color="default" startIcon={<NewReleasesIcon />} onClick={this.alertMessage} style={{ marginLeft: "1vh" }}
->>>>>>> 32edf27e8e335ed0310ab97118dabe41a145deed
               >        알림 메시지
       </Button>
             </Container>
