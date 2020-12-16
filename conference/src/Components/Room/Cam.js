@@ -573,6 +573,7 @@ class Cam extends Component {
       >        화이트 보드
       </Button>
       <Button variant="contained" color="default"  startIcon={<EventSeatIcon />} style = {{marginLeft:"1vh"}}
+       //disabled //교수의 경우 이 기능이 필요가 없다!
       >        자리비움 요청
       </Button>
 
