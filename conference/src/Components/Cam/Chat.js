@@ -101,9 +101,15 @@ const Chat = props => {
         height: "50vh",
     }}>
      
-        <ul className="chat" id="chatList">
+
+        <ul className="chat" id="chatList" >
           {props.messages.map(data => (
-            <Paper square elevation={2} style={{width: "95%", marginBottom: "1vh"}}>
+            <Paper square elevation={2} style={{
+              width: "95%", 
+              marginBottom: "1vh", 
+              borderRadius:"10px",
+              borderTop: "15px",
+              borderLeft: "15px"}}>
             <div key={data.id} style={{overflow : 'auto'}}>
               {user.uid === data.message.sender.uid ? renderMessage('self', data) : (renderMessage('other', data))}
             </div>
@@ -134,6 +140,7 @@ const Chat = props => {
         </DragDrop>
       </Paper>
       <div>
+
       <form onSubmit={handleSubmit} 
         style={{
         }
