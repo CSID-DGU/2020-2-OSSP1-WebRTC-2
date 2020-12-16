@@ -487,6 +487,7 @@ class Cam extends Component {
       remoteStreams,
     } = this.state
 
+    //연결 끊기
     if (disconnected) {
       // disconnect socket
       this.socket.close()
