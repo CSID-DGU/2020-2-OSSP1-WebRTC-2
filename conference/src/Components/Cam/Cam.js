@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import io from 'socket.io-client'
 //import './App.css';
 //import Video from './Components/Video/Video'
@@ -7,7 +7,7 @@ import Video from './Video'
 import Videos from './Videos'
 import Chat from './Chat'
 import { Container, TextField, Dialog, Button, Paper } from '@material-ui/core';
-import {MdExitToApp, MdScreenShare} from "react-icons/md";
+import { MdExitToApp, MdScreenShare } from "react-icons/md";
 
 class Cam extends Component {
   constructor(props) {
@@ -30,20 +30,20 @@ class Cam extends Component {
       pc_config: {
         "iceServers": [
           {
-            urls : 'stun:stun.l.google.com:19302'
+            urls: 'stun:stun.l.google.com:19302'
           },
           {
-            urls:"turn:numb.viagenie.ca",
-            credential:"muazkh",
-            username:"webrtc@live.com"
+            urls: "turn:numb.viagenie.ca",
+            credential: "muazkh",
+            username: "webrtc@live.com"
           }
         ]
       },
 
       sdpConstraints: {
         'mandatory': {
-            'OfferToReceiveAudio': true,
-            'OfferToReceiveVideo': true
+          'OfferToReceiveAudio': true,
+          'OfferToReceiveVideo': true
         }
       },
 
@@ -53,7 +53,7 @@ class Cam extends Component {
     }
 
     // DONT FORGET TO CHANGE TO YOUR URL
-    this.serviceIP = 'https://c191ca613c8d.ngrok.io/webrtcPeer'
+    this.serviceIP = ' https://cb253b3fe56b.ngrok.io/webrtcPeer'
     // https://reactjs.org/docs/refs-and-the-dom.html
     // this.localVideoref = React.createRef()
     // this.remoteVideoref = React.createRef()
@@ -102,8 +102,8 @@ class Cam extends Component {
 
     if (this.state.screenShare == false) {
       navigator.mediaDevices.getUserMedia(constraints)
-      .then(success)
-      .catch(failure)
+        .then(success)
+        .catch(failure)
     } else {
       navigator.mediaDevices.getDisplayMedia({
         video: true
@@ -113,7 +113,7 @@ class Cam extends Component {
 
   whoisOnline = () => {
     // let all peers know I am joining
-    this.sendToPeer('onlinePeers', null, {local: this.socket.id})
+    this.sendToPeer('onlinePeers', null, { local: this.socket.id })
   }
 
   sendToPeer = (messageType, payload, socketID) => {
@@ -225,7 +225,7 @@ class Cam extends Component {
       // return pc
       callback(pc)
 
-    } catch(e) {
+    } catch (e) {
       console.log('Something went wrong! pc not created!!', e)
       // return;
       callback(null)
@@ -290,7 +290,7 @@ class Cam extends Component {
           ...selectedVideo,
           status: data.peerCount > 1 ? `Total Connected Peers to room ${window.location.pathname}: ${data.peerCount}` : 'Waiting for other peers to connect'
         }
-        }
+      }
       )
     })
 
@@ -302,58 +302,58 @@ class Cam extends Component {
       // 1. Create new pc
       this.createPeerConnection(socketID, pc => {
         // 2. Create Offer
-          if (pc) {
-            // Send Channel
-            const handleSendChannelStatusChange = (event) => {
-              console.log('send channel status: ' + this.state.sendChannels[0].readyState)
+        if (pc) {
+          // Send Channel
+          const handleSendChannelStatusChange = (event) => {
+            console.log('send channel status: ' + this.state.sendChannels[0].readyState)
+          }
+
+          const sendChannel = pc.createDataChannel('sendChannel')
+          sendChannel.onopen = handleSendChannelStatusChange
+          sendChannel.onclose = handleSendChannelStatusChange
+
+          this.setState(prevState => {
+            return {
+              sendChannels: [...prevState.sendChannels, sendChannel]
             }
+          })
 
-            const sendChannel = pc.createDataChannel('sendChannel')
-            sendChannel.onopen = handleSendChannelStatusChange
-            sendChannel.onclose = handleSendChannelStatusChange
-
+          // Receive Channels
+          const handleReceiveMessage = (event) => {
+            const message = JSON.parse(event.data)
+            // console.log(message)
             this.setState(prevState => {
               return {
-                sendChannels: [...prevState.sendChannels, sendChannel]
+                messages: [...prevState.messages, message]
               }
             })
-  
-            // Receive Channels
-            const handleReceiveMessage = (event) => {
-              const message = JSON.parse(event.data)
-              // console.log(message)
-              this.setState(prevState => {
-                return {
-                  messages: [...prevState.messages, message]
-                }
-              })
-            }
-
-            const handleReceiveChannelStatusChange = (event) => {
-              if (this.receiveChannel) {
-                console.log("receive channel's status has changed to " + this.receiveChannel.readyState);
-              }
-            }
-
-            const receiveChannelCallback = (event) => {
-              const receiveChannel = event.channel
-              receiveChannel.onmessage = handleReceiveMessage
-              receiveChannel.onopen = handleReceiveChannelStatusChange
-              receiveChannel.onclose = handleReceiveChannelStatusChange
-            }
-
-            pc.ondatachannel = receiveChannelCallback
-
-            pc.createOffer(this.state.sdpConstraints)
-              .then(sdp => {
-                pc.setLocalDescription(sdp)
-
-                this.sendToPeer('offer', sdp, {
-                  local: this.socket.id,
-                  remote: socketID
-                })
-              })
           }
+
+          const handleReceiveChannelStatusChange = (event) => {
+            if (this.receiveChannel) {
+              console.log("receive channel's status has changed to " + this.receiveChannel.readyState);
+            }
+          }
+
+          const receiveChannelCallback = (event) => {
+            const receiveChannel = event.channel
+            receiveChannel.onmessage = handleReceiveMessage
+            receiveChannel.onopen = handleReceiveChannelStatusChange
+            receiveChannel.onclose = handleReceiveChannelStatusChange
+          }
+
+          pc.ondatachannel = receiveChannelCallback
+
+          pc.createOffer(this.state.sdpConstraints)
+            .then(sdp => {
+              pc.setLocalDescription(sdp)
+
+              this.sendToPeer('offer', sdp, {
+                local: this.socket.id,
+                remote: socketID
+              })
+            })
+        }
       })
     })
 
@@ -369,7 +369,7 @@ class Cam extends Component {
         const sendChannel = pc.createDataChannel('sendChannel')
         sendChannel.onopen = handleSendChannelStatusChange
         sendChannel.onclose = handleSendChannelStatusChange
-        
+
         this.setState(prevState => {
           return {
             sendChannels: [...prevState.sendChannels, sendChannel]
@@ -421,7 +421,7 @@ class Cam extends Component {
       // get remote's peerConnection
       const pc = this.state.peerConnections[data.socketID]
       console.log(data.sdp)
-      pc.setRemoteDescription(new RTCSessionDescription(data.sdp)).then(()=>{})
+      pc.setRemoteDescription(new RTCSessionDescription(data.sdp)).then(() => { })
     })
 
     this.socket.on('candidate', (data) => {
@@ -458,19 +458,19 @@ class Cam extends Component {
   }
 
   writeNickname = (event) => {
-    this.setState({nickName: event.target.value});
+    this.setState({ nickName: event.target.value });
   }
 
   entryRoom = () => {
     if (this.state.nickName != "") {
-      this.setState({isNickname: true});
+      this.setState({ isNickname: true });
     } else {
       alert("닉네임을 정확히 입력해주세요.");
     }
   }
 
   shareScreen = () => {
-    this.setState({screenShare: !this.state.screenShare});
+    this.setState({ screenShare: !this.state.screenShare });
     this.getLocalStream();
   }
 
@@ -489,6 +489,7 @@ class Cam extends Component {
     //연결 끊기
     if (disconnected) {
       // disconnect socket
+      alert("미팅룸을 나갑니다");
       this.socket.close()
       // stop local audio & video tracks
       this.stopTracks(localStream)
@@ -499,7 +500,7 @@ class Cam extends Component {
       // stop all remote peerconnections
       peerConnections && Object.values(peerConnections).forEach(pc => pc.close())
 
-      return (<div>You have successfully Disconnected</div>)
+      return window.close();
     }
 
     //console.log(this.state.localStream)
@@ -508,20 +509,22 @@ class Cam extends Component {
     if (this.state.isNickname == false) {
       return (
         <Dialog open={!this.state.isNickname}>
-        <TextField required id="standard-required" label="닉네임을 입력하세요." defaultValue="Nickname"
-                   onChange={this.writeNickname}/>
-        <Button onClick={this.entryRoom}>입장하기</Button>
-      </Dialog>
+          <TextField required id="standard-required" label="닉네임을 입력하세요." defaultValue="Nickname"
+            onChange={this.writeNickname} />
+          <Button onClick={this.entryRoom}>입장하기</Button>
+        </Dialog>
       );
     }
     return (
-      <div style={{padding: "5vh"}}>
+      <div style={{ padding: "5vh" }}>
 
-      
-      <Paper variant="outlined" style={{display: "grid", padding: "1vh", gridTemplateRows: "1fr 1fr", gridTemplateColumns: "1fr 1fr"
-                         ,width: "100%", height: "100%"}}>
 
-      {/*<Draggable style={{
+        <Paper variant="outlined" style={{
+          display: "grid", padding: "1vh", gridTemplateRows: "1fr 1fr", gridTemplateColumns: "1fr 1fr"
+          , width: "100%", height: "100%"
+        }}>
+
+          {/*<Draggable style={{
         zIndex: 101,
         //position: 'absolute',
         bottom: 0,
@@ -531,95 +534,97 @@ class Cam extends Component {
     </Draggable>*/}
 
 
-      {/* 내얼굴 */}
-      <Paper variant="outlined" style={{padding: '2vh'}}>
-        <Video
-          videoType='localVideo'
-          videoStyles={{
-            // zIndex:2,
-            //position: 'absolute',
-            right:0,
-            width: "100%",
-            // height: 200,
-            // margin: 5,
-            // backgroundColor: 'black'
-          }}
-          frameStyle={{
-            width: "100%",
-            margin: 5,
-            borderRadius: 5,
-            backgroundColor: 'black',
-          }}
-          showMuteControls={true}
-          // ref={this.localVideoref}
-          videoStream={localStream}
-          autoPlay muted>
-        </Video>
-          <MdScreenShare size={25} onClick={this.shareScreen}>화면 공유하기</MdScreenShare>
-        </Paper>
+          {/* 내얼굴 */}
+          <Paper variant="outlined" style={{ padding: '2vh' }}>
+            <Video
+              videoType='localVideo'
+              videoStyles={{
+                // zIndex:2,
+                //position: 'absolute',
+                right: 0,
+                width: "100%",
+                // height: 200,
+                // margin: 5,
+                // backgroundColor: 'black'
+              }}
+              frameStyle={{
+                width: "100%",
+                margin: 5,
+                borderRadius: 5,
+                backgroundColor: 'black',
+              }}
+              showMuteControls={true}
+              // ref={this.localVideoref}
+              videoStream={localStream}
+              autoPlay muted>
+            </Video>
+            <MdScreenShare size={25} onClick={this.shareScreen}>화면 공유하기</MdScreenShare>
+          </Paper>
 
-      
-      <div style={{
-          zIndex: 5,
-          position: 'absolute',
-          // margin: 10,
-          // backgroundColor: '#cdc4ff4f',
-          // padding: 10,
-          // borderRadius: 5,
-        }}>
-  
-          <MdExitToApp size={25}
+
+          <div style={{
+            zIndex: 5,
+            position: 'absolute',
+            // margin: 10,
+            // backgroundColor: '#cdc4ff4f',
+            // padding: 10,
+            // borderRadius: 5,
+          }}>
+<MdExitToApp size={25}
                 onClick={(e) => {this.setState({disconnected: true})}}
                 ></MdExitToApp>
-          <div style={{ //please wait 사람수 check
-            margin: 10,
-            backgroundColor: '#cdc4ff4f',
-            padding: 10,
-            borderRadius: 5,
-          }}>{ statusText }</div>
-      </div>
+            {/* <MdExitToApp size={25}
+              onClick={() => { alert('미팅룸을 나갑니다') }}
+            ></MdExitToApp> */}
+            <div style={{ //please wait 사람수 check
+              margin: 10,
+              backgroundColor: '#cdc4ff4f',
+              padding: 10,
+              borderRadius: 5,
+            }}>{statusText}</div>
+          </div>
 
 
-      
-      <Paper style={{gridRow: '1 / 3', gridColumn: '1 / 2'}}>
-        <Videos
-          switchVideo={this.switchVideo}
-          remoteStreams={remoteStreams}
-          // videoStream={this.state.selectedVideo && this.state.selectedVideo.stream}
-        />
-      </Paper>
 
-      <Paper variant='outlined' style={{padding: '2vh', backgroundColor: "#EAF1F6"}}>
-        <Chat
-          style={{gridRow: "1 / 2", gridColumn: "2 / 3", backgroundColor: "#EAF1F6"}}
-            user={{
-              uid: this.socket && this.socket.id || '',
-              unickname: this.state.nickName// 닉네임 던지기
-          }}
-          //변경사항 확인
-          messages={messages}
-          sendMessage={(message) => {
-            this.setState(prevState => {
-              return {messages: [...prevState.messages, message]}
-            })
-            //채널이 오픈되어있을때만
-            this.state.sendChannels.map(sendChannel => {
-              sendChannel.readyState === 'open' && sendChannel.send(JSON.stringify(message))
-            })
-            this.sendToPeer('new-message', JSON.stringify(message), {local: this.socket.id})
-          }}
-        />
-      </Paper>
-        {/* <div style={{zIndex: 1, position: 'fixed'}} >
+          <Paper style={{ gridRow: '1 / 3', gridColumn: '1 / 2' }}>
+            <Videos
+              switchVideo={this.switchVideo}
+              remoteStreams={remoteStreams}
+            // videoStream={this.state.selectedVideo && this.state.selectedVideo.stream}
+            />
+          </Paper>
+
+          <Paper variant='outlined' style={{ padding: '2vh', backgroundColor: "#EAF1F6" }}>
+            <Chat
+              style={{ gridRow: "1 / 2", gridColumn: "2 / 3", backgroundColor: "#EAF1F6" }}
+              user={{
+                uid: this.socket && this.socket.id || '',
+                unickname: this.state.nickName// 닉네임 던지기
+              }}
+              //변경사항 확인
+              messages={messages}
+              sendMessage={(message) => {
+                this.setState(prevState => {
+                  return { messages: [...prevState.messages, message] }
+                })
+                //채널이 오픈되어있을때만
+                this.state.sendChannels.map(sendChannel => {
+                  sendChannel.readyState === 'open' && sendChannel.send(JSON.stringify(message))
+                })
+                this.sendToPeer('new-message', JSON.stringify(message), { local: this.socket.id })
+              }}
+            />
+          </Paper>
+          {/* <div style={{zIndex: 1, position: 'fixed'}} >
           <button onClick={this.createOffer}>Offer</button>
           <button onClick={this.createAnswer}>Answer</button>
           <br />
           <textarea style={{ width: 450, height:40 }} ref={ref => { this.textref = ref }} />
         </div> */}
-        {/* <br />
+          {/* <br />
         <button onClick={this.setRemoteDescription}>Set Remote Desc</button>
         <button onClick={this.addCandidate}>Add Candidate</button> */}
-      </Paper>
+        </Paper>
       </div>
     )
   }
