@@ -101,6 +101,31 @@ class Videos extends Component {
     })
   }
   
+  toggleFullScreen(_video) { //전체화면
+    let elem = document.querySelector("#root > div > div > div > div.MuiPaper-root.MuiPaper-elevation1.MuiPaper-rounded > div > div:nth-child(2) > div > video");
+  
+    if (!document.fullscreenElement) {
+      if (elem.requestFullScreen) {
+        elem.requestFullScreen();
+      } else if (elem.webkitRequestFullScreen) {
+        elem.webkitRequestFullScreen();
+      } else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen(); // IE
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.mozExitFullscreen) {
+        document.mozExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen(); // IE
+      }
+    }
+  } 
 
   render() {
     return (
@@ -108,7 +133,7 @@ class Videos extends Component {
         <Paper varient="outlined" style={{display: "flex", justifyContent: "center", width: "100%", gridRow: "1 / 2", gridColumn: "1 / 2", height: "100%"}}>
           <AiOutlineFullscreen 
                 style={{marginTop: "1vh"}}
-                onClick={this.appClick}
+                onClick={this.toggleFullScreen}
                 ></AiOutlineFullscreen>
         </Paper>
         <Paper variant="outlined" style={{
