@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import { Paper, Divider } from '@material-ui/core';
 import Video from './Video'
-import MonitorIcon from '@material-ui/icons/ScreenShare';
 import { AiOutlineFullscreen } from "react-icons/ai";
 // import useMediaQuery from '@material-ui/core/useMediaQuery';
 
@@ -164,7 +163,7 @@ class Videos extends Component {
         />
         </Paper>
         <Paper varient="outlined" style={{display: "flex", justifyContent: "center", width: "100%", gridRow: "3 / 4", gridColumn: "1 / 2", height: "100%"}}>
-          <MonitorIcon style={{marginTop: "1vh"}}/>
+      
         </Paper>
         <Paper variant="outlined" style={{
           gridRow: "4 / 5",

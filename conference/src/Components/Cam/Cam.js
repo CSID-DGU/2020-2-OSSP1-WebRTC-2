@@ -8,7 +8,7 @@ import Video from './Video'
 import Videos from './Videos'
 import Chat from './Chat'
 import { Container, TextField, Dialog, Button, Paper } from '@material-ui/core';
-
+import {MdExitToApp, MdScreenShare} from "react-icons/md";
 
 class Cam extends Component {
   constructor(props) {
@@ -556,7 +556,8 @@ class Cam extends Component {
           videoStream={localStream}
           autoPlay muted>
         </Video>
-          <Button onClick={this.shareScreen}>화면 공유하기</Button>
+        
+          <MdScreenShare size={25} onClick={this.shareScreen}>화면 공유하기</MdScreenShare>
         </Paper>
 
       
@@ -568,8 +569,10 @@ class Cam extends Component {
           // padding: 10,
           // borderRadius: 5,
         }}>
-          <i onClick={(e) => {this.setState({disconnected: true})}} style={{ cursor: 'pointer', paddingLeft: 15, color: 'red' }} class='material-icons'>highlight_off</i>
-          <Button onClick={this.shareScreen}>나가기 버튼</Button>
+  
+          <MdExitToApp size={25}
+                onClick={(e) => {this.setState({disconnected: true})}}
+                ></MdExitToApp>
           <div style={{ //please wait 사람수 check
             margin: 10,
             backgroundColor: '#cdc4ff4f',
