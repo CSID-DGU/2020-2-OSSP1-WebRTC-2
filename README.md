@@ -35,6 +35,7 @@
  $ npm install -g bower
  $ bower install kurento-client  
  $ npm install react-icons --save
+ $ npm install react-confirm-alert --save
  ```  
  #
  
