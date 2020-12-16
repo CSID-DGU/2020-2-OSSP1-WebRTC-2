@@ -149,10 +149,9 @@ class Videos extends Component {
 
   render() {
     return (
-      <div style={{height: "100%", display: "grid", gridTemplateRows: "3% 47% 3% 47%", gridTemplateColumns: "1fr"}}>
-        <Paper varient="outlined" style={{display: "flex", justifyContent: "center", width: "100%", gridRow: "1 / 2", gridColumn: "1 / 2", height: "100%"}}>
-        <Button variant="contained" color="default" startIcon={<AiOutlineFullscreen />}  onClick={this.toggleFullScreen} style={{ display: "flex", justifyContent: "center", marginLeft: "10vh" }}>      전체화면
-      </Button>
+      <div style={{height: "100%", display: "grid", gridTemplateRows: "5% 45% 3% 47%", gridTemplateColumns: "1fr"}}>
+        <Paper varient="outlined" style={{display: "flex", justifyContent: "flex-end", width: "100%", gridRow: "1 / 2", gridColumn: "1 / 2", height: "100%"}}>
+        <Button variant="contained" color="primary" startIcon={<AiOutlineFullscreen />}  onClick={this.toggleFullScreen}>전체화면</Button>
         </Paper>
         <Paper variant="outlined" style={{
                       gridRow: "2 / 3",
@@ -182,12 +181,17 @@ class Videos extends Component {
         </Paper>
         <Paper varient="outlined" style={{display: "flex", justifyContent: "center", width: "100%", gridRow: "3 / 4", gridColumn: "1 / 2", height: "100%"}}>
         <Container style={{ display: "flex", justifyContent: "center" }}>
-              <Button variant="contained" color="default" startIcon={<CloseIcon />} onClick={this.getOut} style={{ justifyContent: "center" }}
+              {sessionStorage.getItem("userstatus") === "0" ? <Button variant="contained" color="primary" startIcon={<CloseIcon />} onClick={this.getOut} style={{ justifyContent: "center" }}
               >        강제 퇴장
-      </Button>
-              <Button variant="contained" color="default" startIcon={<SpeakerNotesOffIcon />} onClick={this.forbidChat} style={{ marginLeft: "1vh" }}
+      </Button> : <Button variant="contained" color="default" startIcon={<CloseIcon />} onClick={this.getOut} disabled style={{ justifyContent: "center" }}
+              >        강제 퇴장
+      </Button>}
+              {sessionStorage.getItem("userstatus") === "0" ? <Button variant="contained" color="primary" startIcon={<SpeakerNotesOffIcon />} onClick={this.forbidChat} style={{ marginLeft: "1vh" }}
               >        채팅 금지
-      </Button>
+      </Button> : <Button variant="contained" disabled color="default" startIcon={<SpeakerNotesOffIcon />} onClick={this.forbidChat} style={{ marginLeft: "1vh" }}
+              >        채팅 금지
+      </Button>}
+              
             </Container>
         </Paper>
         <Paper variant="outlined" style={{

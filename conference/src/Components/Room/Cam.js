@@ -20,7 +20,7 @@ class Cam extends Component {
 
     this.state = {
       nickName: sessionStorage.getItem("userid"),
-      status: sessionStorage.getItem("userstatus"),
+      userstatus: sessionStorage.getItem("userstatus"),
       screenShare: false,
 
       localStream: null,    // used to hold local stream object to avoid recreating the stream everytime a new offer comes
@@ -58,7 +58,7 @@ class Cam extends Component {
     }
 
     // DONT FORGET TO CHANGE TO YOUR URL
-    this.serviceIP = 'https://872c39790cc1.ngrok.io/webrtcPeer'
+    this.serviceIP = 'https://872c39790cc1.ngrok.io/room/webrtcPeer'
 
     // https://reactjs.org/docs/refs-and-the-dom.html
     // this.localVideoref = React.createRef()
@@ -523,7 +523,9 @@ class Cam extends Component {
     const statusText = <div style={{ color: 'yellow', padding: 5 }}>{status}</div>
     return (
       <div style={{ padding: "5vh" }}>
+        <Paper variant="outlined" style={{width: "100%", height: "5vh", marginBottom: "2vh"}}>
 
+        </Paper>
 
         <Paper variant="outlined" style={{
           display: "grid", padding: "1vh", gridTemplateRows: "1fr 1fr", gridTemplateColumns: "1fr 1fr"
@@ -567,17 +569,20 @@ class Cam extends Component {
             </Video>
 
             <Container style={{ display: "flex", justifyContent: "center" }}>
-              <Button variant="contained" color="default" startIcon={<ScreenShareIcon />} onClick={this.shareScreen} style={{ justifyContent: "center" }}
+              <Button variant="contained" color="primary" startIcon={<ScreenShareIcon />} onClick={this.shareScreen} style={{justifyContent: "center" }}
               >        화면 공유
       </Button>
-              <Button variant="contained" color="default" startIcon={<BrushIcon />} onClick={this.drawWhiteboard} style={{ marginLeft: "1vh" }}
+              <Button variant="contained" color="primary" startIcon={<BrushIcon />} onClick={this.drawWhiteboard} style={{marginLeft: "1vh" }}
               >        화이트 보드
       </Button>
-              <Button variant="contained" color="default" startIcon={<EventSeatIcon />} style={{ marginLeft: "1vh" }}
-              //disabled //교수의 경우 이 기능이 필요가 없다!
+              {this.state.userstatus === "0" ? 
+              <Button variant="contained" color="default" startIcon={<EventSeatIcon />} style={{marginLeft: "1vh" }}
+              disabled //교수의 경우 이 기능이 필요가 없다!
               >        자리비움 요청
-      </Button>
-              <Button variant="contained" color="default" startIcon={<NewReleasesIcon />} onClick={this.alertMessage} style={{ marginLeft: "1vh" }}
+      </Button> : <Button variant="contained" color="primary" startIcon={<EventSeatIcon />} style={{marginLeft: "1vh" }} //교수의 경우 이 기능이 필요가 없다!
+              >        자리비움 요청
+      </Button> }
+              <Button variant="contained" color="primary" startIcon={<NewReleasesIcon />} onClick={this.alertMessage} style={{marginLeft: "1vh" }}
               >        알림 메시지
       </Button>
             </Container>
@@ -593,11 +598,9 @@ class Cam extends Component {
             // padding: 10,
             // borderRadius: 5,
           }}>
-            <Container style={{ display: "flex", justifyContent: "center"}}>
-            <Button variant="contained" color="default" startIcon={<MdExitToApp />} onClick={(e) => { this.setState({ disconnected: true }) }} style={{ display: "flex", justifyContent: "center", marginLeft: "34vh" }}
+                      <Button variant="contained" color="default" startIcon={<MdExitToApp />} onClick={(e) => { this.setState({ disconnected: true }) }} style={{ display: "flex", justifyContent: "center"}}
             >      나가기
       </Button>
-      </Container>
             {/* <MdExitToApp size={25}
               onClick={() => { alert('미팅룸을 나갑니다') }}
             ></MdExitToApp> */}
