@@ -12,7 +12,7 @@ import EventSeatIcon from '@material-ui/icons/EventSeat';
 import ScreenShareIcon from '@material-ui/icons/ScreenShare';
 import BrushIcon from '@material-ui/icons/Brush';
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
-
+import IoPersonCircleOutline from "react-icons/io"
 
 class Cam extends Component {
   constructor(props) {
@@ -22,7 +22,8 @@ class Cam extends Component {
       nickName: sessionStorage.getItem("userid"),
       userstatus: sessionStorage.getItem("userstatus"),
       screenShare: false,
-
+      emptySeat: false, //안눌렸을 경우 그대로 화면 송출 -> 기본 | 눌렸을 경우 자리비움 표시
+      
       localStream: null,    // used to hold local stream object to avoid recreating the stream everytime a new offer comes
       remoteStream: null,    // used to hold remote stream object that is displayed in the main screen
 
@@ -58,7 +59,11 @@ class Cam extends Component {
     }
 
     // DONT FORGET TO CHANGE TO YOUR URL
+<<<<<<< HEAD
     this.serviceIP = 'https://872c39790cc1.ngrok.io/room/webrtcPeer'
+=======
+    this.serviceIP = ' https://1e4540ade5fb.ngrok.io/webrtcPeer'
+>>>>>>> 32edf27e8e335ed0310ab97118dabe41a145deed
 
     // https://reactjs.org/docs/refs-and-the-dom.html
     // this.localVideoref = React.createRef()
@@ -66,6 +71,10 @@ class Cam extends Component {
 
     this.socket = null
     // this.candidates = []
+  }
+
+  getEmptyPage = () =>{
+    
   }
 
   getLocalStream = () => {
@@ -106,11 +115,17 @@ class Cam extends Component {
 
     // https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
 
+    //화면공유 조건!
     if (this.state.screenShare == false) {
       navigator.mediaDevices.getUserMedia(constraints)
         .then(success)
         .catch(failure)
-    } else {
+    } else if(this.state.emptySeat == false){
+
+    } else if(this.state.emptySeat == true){
+
+    }
+    else {
       navigator.mediaDevices.getDisplayMedia({
         video: true
       }).then(success).catch(failure)
@@ -479,6 +494,10 @@ class Cam extends Component {
     this.setState({ screenShare: !this.state.screenShare });
     this.getLocalStream();
   }
+  emptySeat = () =>{
+    this.setState({ emptySeat: !this.state.emptySeat });
+    this.getLocalStream();
+  }
   //화이트보드
   drawWhiteboard = () => {
     <Route exact path="/board" component={Board} />
@@ -491,7 +510,6 @@ class Cam extends Component {
 
   render() {
     console.log(this.state);
-    //???
     const {
       status,
       messages,
@@ -575,6 +593,7 @@ class Cam extends Component {
               <Button variant="contained" color="primary" startIcon={<BrushIcon />} onClick={this.drawWhiteboard} style={{marginLeft: "1vh" }}
               >        화이트 보드
       </Button>
+<<<<<<< HEAD
               {this.state.userstatus === "0" ? 
               <Button variant="contained" color="default" startIcon={<EventSeatIcon />} style={{marginLeft: "1vh" }}
               disabled //교수의 경우 이 기능이 필요가 없다!
@@ -583,6 +602,13 @@ class Cam extends Component {
               >        자리비움 요청
       </Button> }
               <Button variant="contained" color="primary" startIcon={<NewReleasesIcon />} onClick={this.alertMessage} style={{marginLeft: "1vh" }}
+=======
+              <Button variant="contained" color="default" startIcon={<EventSeatIcon />} onClick={this.emptySeat} style={{ marginLeft: "1vh" }}
+              //disabled //교수의 경우 이 기능이 필요가 없다!
+              >        자리비움
+      </Button>
+              <Button variant="contained" color="default" startIcon={<NewReleasesIcon />} onClick={this.alertMessage} style={{ marginLeft: "1vh" }}
+>>>>>>> 32edf27e8e335ed0310ab97118dabe41a145deed
               >        알림 메시지
       </Button>
             </Container>
