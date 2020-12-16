@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import { Paper, Divider } from '@material-ui/core';
 import Video from './Video'
 import MonitorIcon from '@material-ui/icons/ScreenShare';
+import { AiOutlineFullscreen } from "react-icons/ai";
+// import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 class Videos extends Component {
   constructor(props) {
@@ -98,18 +100,27 @@ class Videos extends Component {
       videoVisible: !muteTrack.muted
     })
   }
+  
 
   render() {
     return (
-      <div style={{height: "100%", display: "grid", gridTemplateRows: "47% 3% 50%", gridTemplateColumns: "1fr"}}>
+      <div style={{height: "100%", display: "grid", gridTemplateRows: "3% 47% 3% 47%", gridTemplateColumns: "1fr"}}>
+        <Paper varient="outlined" style={{display: "flex", justifyContent: "center", width: "100%", gridRow: "1 / 2", gridColumn: "1 / 2", height: "100%"}}>
+          <AiOutlineFullscreen 
+                style={{marginTop: "1vh"}}
+                onClick={this.appClick}
+                ></AiOutlineFullscreen>
+        </Paper>
         <Paper variant="outlined" style={{
-                      gridRow: "1 / 2",
+                      gridRow: "2 / 3",
                       gridColumn: "1 / 2",
                       //bottom: 0,
                       width: "100%",
                       height: "100%",
                       padding: "2vh"
         }}>
+          
+          
         <Video // 대장 화면 뜨는 곳
           style={{width: "100%", height: "100%"}} 
           videoType='previewVideo'
@@ -127,11 +138,11 @@ class Videos extends Component {
           videoStream={this.state.selectedVideo && this.state.selectedVideo.stream}
         />
         </Paper>
-        <Paper varient="outlined" style={{display: "flex", justifyContent: "center", width: "100%", gridRow: "2 / 3", gridColumn: "1 / 2", height: "100%"}}>
+        <Paper varient="outlined" style={{display: "flex", justifyContent: "center", width: "100%", gridRow: "3 / 4", gridColumn: "1 / 2", height: "100%"}}>
           <MonitorIcon style={{marginTop: "1vh"}}/>
         </Paper>
         <Paper variant="outlined" style={{
-          gridRow: "3 / 4",
+          gridRow: "4 / 5",
           gridColumn: "1 / 2",
           width: "100%",
           height: "100%",
@@ -156,6 +167,7 @@ class Videos extends Component {
         </div>
         </Paper>
       </div>
+    
     )
   }
 
